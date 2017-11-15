@@ -5,8 +5,8 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
+
+import { Link } from 'react-router-dom'
 
 const styles = theme => ({
   root: {
@@ -27,13 +27,10 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton className={classes.menuButton} color="contrast" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
           <Typography type="title" color="inherit" className={classes.flex}>
             Readable
           </Typography>
-          <Button color="contrast">New post</Button>
+          <Button component={Link} to="/new" color="contrast">New post</Button>
         </Toolbar>
       </AppBar>
     </div>

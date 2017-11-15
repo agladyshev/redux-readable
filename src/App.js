@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 
 import './App.css';
 import 'typeface-roboto'
@@ -21,7 +21,7 @@ class App extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
+      <Switch>
         <Route exact path='/' render={() => (
           <div className={classes.root}>
             <ButtonAppBar/>
@@ -29,27 +29,36 @@ class App extends Component {
             <LabelBottomNavigation/>
           </div>
         )}/>
-        <Route path='/new' render={() => (
-          <div className={classes.root}>
-            new post
-          </div>
-        )}/>
+
         <Route exact path='/:id' render={() => (
           <div className={classes.root}>
-            category
+            <ButtonAppBar/>
+            <AutoGrid/>
+            <LabelBottomNavigation/>
           </div>
         )}/>
         <Route exact path='/post/:id' render={() => (
           <div className={classes.root}>
-            post
+            <ButtonAppBar/>
+            <AutoGrid/>
+            <LabelBottomNavigation/>
           </div>
         )}/>
         <Route exact path='/post/:id/edit' render={() => (
           <div className={classes.root}>
-            post edit
+            <ButtonAppBar/>
+            <AutoGrid/>
+            <LabelBottomNavigation/>
           </div>
         )}/>
-      </div>
+        <Route exact path='/new' render={() => (
+          <div className={classes.root}>
+            <ButtonAppBar/>
+            <AutoGrid/>
+            <LabelBottomNavigation/>
+          </div>
+        )}/>
+      </Switch>
     )
   }
 }

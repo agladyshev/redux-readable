@@ -4,15 +4,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
-import RestoreIcon from 'material-ui-icons/Restore';
-import FavoriteIcon from 'material-ui-icons/Favorite';
-import LocationOnIcon from 'material-ui-icons/LocationOn';
-import FolderIcon from 'material-ui-icons/Folder';
+
+import { Link } from 'react-router-dom'
 
 const styles = {
   root: {
     flex: '0 1 auto',
   },
+  button: {
+    padding: 0,
+  }
 };
 
 class LabelBottomNavigation extends React.Component {
@@ -30,10 +31,10 @@ class LabelBottomNavigation extends React.Component {
 
     return (
       <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
-        <BottomNavigationButton label="All" value="All" showLabel="true"/>
-        <BottomNavigationButton label="React" value="React" showLabel="true"/>
-        <BottomNavigationButton label="Redux" value="Redux" showLabel="true"/>
-        <BottomNavigationButton label="Udacity" value="Udacity" showLabel="true"/>
+        <BottomNavigationButton component={Link} to="/" label="All" value="All" showLabel="true" className={classes.button}/>
+        <BottomNavigationButton component={Link} to="/react" label="React" value="React" showLabel="true" className={classes.button}/>
+        <BottomNavigationButton component={Link} to="/redux" label="Redux" value="Redux" showLabel="true" className={classes.button}/>
+        <BottomNavigationButton component={Link} to="/udacity" label="Udacity" value="Udacity" showLabel="true" className={classes.button}/>
       </BottomNavigation>
     );
   }
