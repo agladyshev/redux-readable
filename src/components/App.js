@@ -8,6 +8,10 @@ import LabelBottomNavigation from './LabelBottomNavigation'
 
 import { withStyles } from 'material-ui/styles';
 
+import { fetchPosts } from '../utils/api'
+import { fetchComments } from '../utils/api'
+import { fetchCategories } from '../utils/api'
+
 const styles = theme => ({
   root: {
     height: '100vh',
@@ -17,6 +21,19 @@ const styles = theme => ({
 })
 
 class App extends Component {
+  componentDidMount() {
+    fetchPosts()
+    .then((posts) => {
+      posts.forEach(post => {
+        console.log(post)
+        fetchComments(post.id)
+        .then((comments) => console.log(comments))
+      })
+    })
+    fetchCategories()
+    .then((categories) => console.log(categories))
+  }
+
   render() {
     const { classes } = this.props;
     return (
