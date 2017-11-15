@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
-import './App.css';
 import 'typeface-roboto'
 import ButtonAppBar from './ButtonAppBar'
 import AutoGrid from './AutoGrid'
@@ -29,7 +28,6 @@ class App extends Component {
             <LabelBottomNavigation/>
           </div>
         )}/>
-
         <Route exact path='/:id' render={() => (
           <div className={classes.root}>
             <ButtonAppBar/>
