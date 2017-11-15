@@ -21,19 +21,6 @@ const styles = theme => ({
 })
 
 class App extends Component {
-  // componentDidMount() {
-  //   fetchPosts()
-  //   .then((posts) => {
-  //     posts.forEach(post => {
-  //       console.log(post)
-  //       fetchComments(post.id)
-  //       .then((comments) => console.log(comments))
-  //     })
-  //   })
-  //   fetchCategories()
-  //   .then((categories) => console.log(categories))
-  // }
-
   render() {
     const { classes } = this.props;
     return (
