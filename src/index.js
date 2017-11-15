@@ -5,8 +5,28 @@ import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 
+import { createStore } from 'redux'
+import reducer from './reducers'
+import { Provider } from 'react-redux'
+
+import { fetchCategories } from './utils/api'
+import { addCategory } from './actions'
+
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
+
+fetchCategories().then((res) => {
+  res.categories.forEach(category => {
+    store.dispatch(addCategory(category))
+  })
+})
+
 ReactDOM.render(
-  <BrowserRouter><App /></BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter><App /></BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 )
 registerServiceWorker();
