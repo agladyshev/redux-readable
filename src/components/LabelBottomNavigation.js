@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 import { capitalize } from '../utils/helpers'
 import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
 
 const styles = {
   root: {
@@ -63,9 +64,16 @@ class LabelBottomNavigation extends React.Component {
   }
 }
 
+function mapStateToProps ({ categories }) {
+  return {
+    categories: categories,
+  }
+}
+
 LabelBottomNavigation.propTypes = {
   classes: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
+  // categories: PropTypes.Array.isRequired
 };
 
 // export default withStyles(styles)(LabelBottomNavigation);
@@ -73,4 +81,5 @@ LabelBottomNavigation.propTypes = {
 export default compose(
   withStyles(styles),
   withRouter,
+  connect(mapStateToProps),
 )(LabelBottomNavigation)
