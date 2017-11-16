@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import 'typeface-roboto'
 import ButtonAppBar from './ButtonAppBar'
 import AutoGrid from './AutoGrid'
+import PostsGrid from './PostsGrid'
 import LabelBottomNavigation from './LabelBottomNavigation'
 
 import { withStyles } from 'material-ui/styles';
@@ -30,7 +31,7 @@ class App extends Component {
         <Route exact path='/' render={() => (
           <div className={classes.root}>
             <ButtonAppBar/>
-            <AutoGrid/>
+            <PostsGrid/>
             <LabelBottomNavigation/>
           </div>
         )}/>

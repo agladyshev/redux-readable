@@ -9,8 +9,6 @@ function categories (state = [], action) {
   switch (action.type) {
     case ADD_CATEGORY :
       const { name, path } = action
-      console.log(state)
-      console.log()
       return [
         ...state,
         {name, path}

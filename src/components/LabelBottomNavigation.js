@@ -31,16 +31,10 @@ class LabelBottomNavigation extends React.Component {
     this.setState({ value });
   };
 
-  componentDidMount () {
-    // console.log(this.state.location.pathname);
-  }
-
   render() {
     const { classes, categories } = this.props
     const { value } = this.state
-    console.log(this.state)
     const navBar =  []
-    console.log(categories)
     for (const category of categories) {
       const {name, path} = category
       const label = capitalize(name)
