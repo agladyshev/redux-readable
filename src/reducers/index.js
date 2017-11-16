@@ -25,6 +25,9 @@ function categories (state = [], action) {
 
 function posts (state = [], action) {
   switch (action.type) {
+    case RECEIVE_POSTS :
+      const { posts } = action
+      return posts
     case ADD_POST :
       const { id, timestamp, title, body, author, category, voteScore, deleted } = action
       return [

@@ -4,8 +4,12 @@ import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 
+import Post from './Post'
+
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+
+import { fetchPosts } from '../actions'
 
 const styles = theme => ({
   root: {
@@ -13,53 +17,56 @@ const styles = theme => ({
     margin: '1rem',
     'overflow-x': 'hidden',
   },
-  paper: {
-    padding: 16,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
+  // paper: {
+  //   padding: 16,
+  //   textAlign: 'center',
+  //   color: theme.palette.text.secondary,
+  // },
 });
 
-function PostsGrid(props) {
-  const { classes, posts } = props;
-  console.log(posts)
+class PostsGrid extends React.Component {
 
-  return (
-    <div className={classes.root}>
-      <Grid container
-        spacing={24}
-        direction='column'
-        justify='flex-start'
-        alignItems='center'
-      >
-        <Grid item xs>
-          <Paper className={classes.paper}>Lorem Ipsum Dorem Lorem Ipsum Dorem Lorem Ipsum Dorem Lorem Ipsum Dorem</Paper>
+  componentWillMount() {
+    console.log(!this.props.posts.length)
+    !this.props.posts.length && this.props.dispatch(fetchPosts())
+  }
+
+  render() {
+    const { classes, posts} = this.props
+    console.log(posts)
+    const postsRendered = [] 
+    for (const post of posts) {
+      const {author, body, commentCount, timestamp, title, voteScore, id} = post
+      postsRendered.push(
+        <Post
+        author={author}
+        body={body}
+        commentCount={commentCount}
+        timestamp={timestamp}
+        title={title}
+        voteScore={voteScore}
+        key={id} />
+      )
+    }
+
+    return (
+      <div className={classes.root}>
+        <Grid container
+          spacing={24}
+          direction='column'
+          justify='flex-start'
+          alignItems='center'
+        >
+          {postsRendered}
         </Grid>
-        <Grid item xs>
-          <Paper className={classes.paper}>Lorem Ipsum Dorem Lorem Ipsum Dorem Lorem Ipsum Dorem Lorem Ipsum Dorem</Paper>
-        </Grid>
-        <Grid item xs>
-          <Paper className={classes.paper}>Lorem Ipsum Dorem Lorem Ipsum Dorem Lorem Ipsum Dorem Lorem Ipsum Dorem</Paper>
-        </Grid>
-        <Grid item xs>
-          <Paper className={classes.paper}>Lorem Ipsum Dorem Lorem Ipsum Dorem Lorem Ipsum Dorem Lorem Ipsum Dorem</Paper>
-        </Grid>
-        <Grid item xs>
-          <Paper className={classes.paper}>Lorem Ipsum Dorem Lorem Ipsum Dorem Lorem Ipsum Dorem Lorem Ipsum Dorem</Paper>
-        </Grid>
-        <Grid item xs>
-          <Paper className={classes.paper}>Lorem Ipsum Dorem Lorem Ipsum Dorem Lorem Ipsum Dorem Lorem Ipsum Dorem</Paper>
-        </Grid>
-        <Grid item xs>
-          <Paper className={classes.paper}>Lorem Ipsum Dorem Lorem Ipsum Dorem Lorem Ipsum Dorem Lorem Ipsum Dorem</Paper>
-        </Grid>
-      </Grid>
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
 PostsGrid.propTypes = {
   classes: PropTypes.object.isRequired,
+
 };
 
 function mapStateToProps ({ posts }) {
