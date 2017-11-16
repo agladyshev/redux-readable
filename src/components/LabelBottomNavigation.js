@@ -12,6 +12,8 @@ import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 
+import { fetchCategories } from '../actions'
+
 const styles = {
   root: {
     flex: '0 1 auto',
@@ -30,6 +32,11 @@ class LabelBottomNavigation extends React.Component {
   handleChange = (event, value) => {
     this.setState({ value });
   };
+
+  componentWillMount() {
+    console.log(!this.props.categories.length)
+    !this.props.categories.length && this.props.dispatch(fetchCategories())
+  }
 
   render() {
     const { classes, categories } = this.props

@@ -6,6 +6,7 @@ export function fetchPosts () {
 }
 
 export function fetchCategories () {
+	console.log("fetch")
 	return fetch(
 		'http://localhost:3001/categories',
 		{ headers: { 'Authorization': 'whatever-you-want' }})

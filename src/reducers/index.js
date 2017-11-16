@@ -3,10 +3,15 @@ import { combineReducers } from 'redux'
 import {
   ADD_CATEGORY,
   ADD_POST,
+  RECEIVE_CATEGORIES,
+  RECEIVE_POSTS,
 } from '../actions'
 
 function categories (state = [], action) {
   switch (action.type) {
+    case RECEIVE_CATEGORIES:
+      const { categories } = action
+      return categories
     case ADD_CATEGORY :
       const { name, path } = action
       return [
