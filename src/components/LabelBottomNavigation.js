@@ -47,7 +47,7 @@ class LabelBottomNavigation extends React.Component {
       navBar.push(
         <BottomNavigationButton
         component={Link}
-        to={path}
+        to={{pathname:`/${path}`}}
         label={label}
         value={name}
         showLabel="true"
