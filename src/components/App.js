@@ -37,7 +37,6 @@ class App extends Component {
               <LabelBottomNavigation/>
             </div>
           )}/>
-
           <Route exact path='/:category' render={() => (
             <div className={classes.root}>
               <ButtonAppBar/>

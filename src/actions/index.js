@@ -63,9 +63,9 @@ export const fetchPosts = () => dispatch => (
     .then(posts => dispatch(receivePosts(posts)))
 )
 
-export const fetchPostsByCategory = () => dispatch => (
+export const fetchPostsByCategory = (category) => dispatch => (
   ServerAPIUtil
-    .fetchPostsByCategory()
+    .fetchPostsByCategory(category)
     .then(posts => dispatch(receivePosts(posts)))
 )
 

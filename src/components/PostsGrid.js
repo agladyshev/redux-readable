@@ -28,10 +28,14 @@ const styles = theme => ({
 class PostsGrid extends React.Component {
 
   componentWillMount() {
-    const { posts, category, dispatch } = this.props
+    const { posts, dispatch } = this.props
+    const { category } = this.props.match.params
+    console.log(!posts.length)
+    console.log(!category)
     !posts.length && !category ?
+    // console.log('posts') : console.log('cat')
     dispatch(fetchPosts()) :
-    dispatch(fetchPostsByCategory())
+    dispatch(fetchPostsByCategory(category))
   }
 
   render() {
