@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import 'typeface-roboto'
 import ButtonAppBar from './ButtonAppBar'
 import AutoGrid from './AutoGrid'
+import Post from './Post'
 import PostsGrid from './PostsGrid'
 import LabelBottomNavigation from './LabelBottomNavigation'
 
@@ -37,7 +38,7 @@ class App extends Component {
             <PostsGrid/>
           )}/>
           <Route exact path='/post/:id' render={() => (
-            <AutoGrid/>
+            <Post/>
           )}/>
           <Route exact path='/post/:id/edit' render={() => (
             <AutoGrid/>
