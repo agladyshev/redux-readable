@@ -18,9 +18,10 @@ export const receivePosts = posts => ({
   posts 
 })
 
-export const receiveComments = comments => ({
+export const receiveComments = (id, comments) => ({
   type: RECEIVE_COMMENTS,
-  comments
+  comments,
+  id
 })
 
 export const fetchCategories = () => dispatch => (
@@ -38,7 +39,7 @@ export const fetchPosts = () => dispatch => (
 export const fetchComments = (id) => dispatch => (
   ServerAPIUtil
     .fetchComments(id)
-    .then(comments => dispatch(receiveComments(comments)))
+    .then(comments => dispatch(receiveComments(id, comments)))
   )
 
 export function addCategory ({ name, path }) {

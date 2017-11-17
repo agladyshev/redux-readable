@@ -40,13 +40,14 @@ function posts (state = [], action) {
   }
 }
 
-function comments (state = null, action) {
+function comments (state = new Map([]), action) {
   switch (action.type) {
     case RECEIVE_COMMENTS :
       console.log('reduce comments')
-      const { comments } = action
+      const { id, comments } = action
       console.log(comments)
-      return comments
+      const newState = new Map(state)
+      return newState.set(id, comments)
     default :
       return state
   }

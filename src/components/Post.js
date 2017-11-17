@@ -24,10 +24,12 @@ const styles = theme => ({
 class Post extends React.Component {
 
   componentWillMount() {
-    const id = this.props.id
-    !this.props.comments && this.props.dispatch(fetchComments(id))
+    const { id, comments, title, dispatch } = this.props
+    console.log(comments)
+    // if post comments are undefined, fetch them from server
+    !comments && dispatch(fetchComments(id))
     // change to fetch just one post
-    !this.props.title && this.props.dispatch(fetchPosts())
+    !title && dispatch(fetchPosts())
   }
 
   render() {
@@ -54,17 +56,17 @@ class Post extends React.Component {
       </Grid>
     )
   }
-  
 }
 
 function mapStateToProps ({ posts, comments }, { match }) {
   const id = match.params.id
   const [{ body="", title="" }={}] = posts.filter(post => post.id === id)
+  const postComments = comments.get(id)
   return {
     title: title,
     body: body,
     id: id,
-    comments: comments
+    comments: postComments
   }
 }
 
