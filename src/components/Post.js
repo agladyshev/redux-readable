@@ -57,7 +57,10 @@ class Post extends React.Component {
 
 function mapStateToProps ({ posts, comments }, { match }) {
   const id = match.params.id
-  const [{ body="", title="" }={}] = posts.filter(post => post.id === id)
+  console.log(id)
+  console.log(posts)
+   
+  const { body="", title="" } = posts.has(id) ? posts.get(id) : {}
   const postComments = comments.get(id)
   return {
     title: title,

@@ -26,17 +26,18 @@ function categories (state = [], action) {
   }
 }
 
-function posts (state = [], action) {
+function posts (state = new Map([]), action) {
+
   switch (action.type) {
     case RECEIVE_POSTS :
       const { posts } = action
-      return posts
+      const newState = new Map(state)
+      posts.forEach(post => newState.set(post.id, post))
+      return newState
     case RECEIVE_POST :
       const { id, timestamp, title, body, author, category, voteScore, deleted } = action
-      return [
-        ...state,
-        { id, timestamp, title, body, author, category, voteScore, deleted }
-      ]
+      return new Map(state.set(id, { id, timestamp, title, body, author, category, voteScore, deleted }))
+
     default :
       return state
   }

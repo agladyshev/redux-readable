@@ -71,10 +71,12 @@ PostsGrid.propTypes = {
 
 function mapStateToProps ({ posts }, { match }) {
   const category = match.params.category
+  // convert store map to single array
+  const postsArray = Array.from(posts, array => array[1])
   return !category ? {
-    posts: posts,
+    posts: postsArray,
   } : {
-    posts: posts.filter(post => post.category === category)
+    posts: postsArray.filter(post => post.category === category)
   }
 }
 
