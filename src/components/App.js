@@ -35,10 +35,10 @@ class App extends Component {
             <LabelBottomNavigation/>
           </div>
         )}/>
-        <Route exact path='/:id' render={() => (
+        <Route exact path='/:category' render={(props) => (
           <div className={classes.root}>
             <ButtonAppBar/>
-            <AutoGrid/>
+            <PostsGrid category={props}/>
             <LabelBottomNavigation/>
           </div>
         )}/>

@@ -26,7 +26,7 @@ const styles = {
 class LabelBottomNavigation extends React.Component {
   state = {
     value: this.props.match.url.length > 1 
-    ? this.props.match.url.substr(1) : this.props.match.url,
+    ? this.props.match.params.category : this.props.match.url,
   };
 
   handleChange = (event, value) => {
@@ -34,7 +34,6 @@ class LabelBottomNavigation extends React.Component {
   };
 
   componentWillMount() {
-    console.log(!this.props.categories.length)
     !this.props.categories.length && this.props.dispatch(fetchCategories())
   }
 

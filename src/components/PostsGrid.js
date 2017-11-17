@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
+import { withRouter } from 'react-router-dom'
 
 import Post from './Post'
 
@@ -27,13 +28,11 @@ const styles = theme => ({
 class PostsGrid extends React.Component {
 
   componentWillMount() {
-    console.log(!this.props.posts.length)
     !this.props.posts.length && this.props.dispatch(fetchPosts())
   }
 
   render() {
     const { classes, posts} = this.props
-    console.log(posts)
     const postsRendered = [] 
     for (const post of posts) {
       const {author, body, commentCount, timestamp, title, voteScore, id} = post
@@ -69,13 +68,17 @@ PostsGrid.propTypes = {
 
 };
 
-function mapStateToProps ({ posts }) {
-  return {
+function mapStateToProps ({ posts }, { match }) {
+  const category = match.params.category
+  return !category ? {
     posts: posts,
+  } : {
+    posts: posts.filter(post => post.category === category)
   }
 }
 
 export default compose(
   withStyles(styles),
+  withRouter,
   connect(mapStateToProps),
 )(PostsGrid)
