@@ -55,8 +55,7 @@ class LabelBottomNavigation extends React.Component {
         key={name} />
       )
     }
-    console.log(this.props.match.url)
-    console.log(this.props.match)
+    console.log(value)
     return (
       <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
         <BottomNavigationButton component={Link} to="/" label="All" value="/" showLabel="true" className={classes.button}/>

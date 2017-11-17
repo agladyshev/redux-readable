@@ -28,26 +28,45 @@ class App extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
-        <ButtonAppBar/>
+      <div>
         <Switch>
-          <Route exact path='/' render={() => (         
-            <PostsGrid/>   
+          <Route exact path='/' render={() => (
+            <div className={classes.root}>
+              <ButtonAppBar/>         
+              <PostsGrid/>
+              <LabelBottomNavigation/>
+            </div>
           )}/>
+
           <Route exact path='/:category' render={() => (
-            <PostsGrid/>
+            <div className={classes.root}>
+              <ButtonAppBar/>
+              <PostsGrid/>
+              <LabelBottomNavigation/>
+            </div>
           )}/>
           <Route exact path='/post/:id' render={() => (
-            <Post/>
+            <div className={classes.root}>
+              <ButtonAppBar/>
+              <Post/>
+              <LabelBottomNavigation/>
+            </div>
           )}/>
           <Route exact path='/post/:id/edit' render={() => (
-            <AutoGrid/>
+            <div className={classes.root}>
+              <ButtonAppBar/>
+              <AutoGrid/>
+              <LabelBottomNavigation/>
+            </div>
           )}/>
           <Route exact path='/new' render={() => (
-            <AutoGrid/>
+            <div className={classes.root}>
+              <ButtonAppBar/>
+              <AutoGrid/>
+              <LabelBottomNavigation/>
+            </div>
           )}/>
         </Switch>
-        <LabelBottomNavigation/>
       </div>
     )
   }
