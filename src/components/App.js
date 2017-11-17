@@ -33,8 +33,8 @@ class App extends Component {
           <Route exact path='/' render={() => (         
             <PostsGrid/>   
           )}/>
-          <Route exact path='/:category' render={(props) => (
-            <PostsGrid category={props}/>
+          <Route exact path='/:category' render={() => (
+            <PostsGrid/>
           )}/>
           <Route exact path='/post/:id' render={() => (
             <AutoGrid/>

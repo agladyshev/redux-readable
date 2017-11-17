@@ -5,7 +5,7 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import { withRouter } from 'react-router-dom'
 
-import Post from './Post'
+import PostSnippet from './PostSnippet'
 
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -37,13 +37,14 @@ class PostsGrid extends React.Component {
     for (const post of posts) {
       const {author, body, commentCount, timestamp, title, voteScore, id} = post
       postsRendered.push(
-        <Post
+        <PostSnippet
         author={author}
         body={body}
         commentCount={commentCount}
         timestamp={timestamp}
         title={title}
         voteScore={voteScore}
+        id={id}
         key={id} />
       )
     }
