@@ -27,43 +27,27 @@ class App extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <Switch>
-        <Route exact path='/' render={() => (
-          <div className={classes.root}>
-            <ButtonAppBar/>
-            <PostsGrid/>
-            <LabelBottomNavigation/>
-          </div>
-        )}/>
-        <Route exact path='/:category' render={(props) => (
-          <div className={classes.root}>
-            <ButtonAppBar/>
+      <div className={classes.root}>
+        <ButtonAppBar/>
+        <Switch>
+          <Route exact path='/' render={() => (         
+            <PostsGrid/>   
+          )}/>
+          <Route exact path='/:category' render={(props) => (
             <PostsGrid category={props}/>
-            <LabelBottomNavigation/>
-          </div>
-        )}/>
-        <Route exact path='/post/:id' render={() => (
-          <div className={classes.root}>
-            <ButtonAppBar/>
+          )}/>
+          <Route exact path='/post/:id' render={() => (
             <AutoGrid/>
-            <LabelBottomNavigation/>
-          </div>
-        )}/>
-        <Route exact path='/post/:id/edit' render={() => (
-          <div className={classes.root}>
-            <ButtonAppBar/>
+          )}/>
+          <Route exact path='/post/:id/edit' render={() => (
             <AutoGrid/>
-            <LabelBottomNavigation/>
-          </div>
-        )}/>
-        <Route exact path='/new' render={() => (
-          <div className={classes.root}>
-            <ButtonAppBar/>
+          )}/>
+          <Route exact path='/new' render={() => (
             <AutoGrid/>
-            <LabelBottomNavigation/>
-          </div>
-        )}/>
-      </Switch>
+          )}/>
+        </Switch>
+        <LabelBottomNavigation/>
+      </div>
     )
   }
 }
