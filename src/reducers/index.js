@@ -37,7 +37,6 @@ function posts (state = new Map([]), action) {
     case RECEIVE_POST :
       const { id, timestamp, title, body, author, category, voteScore, deleted } = action
       return new Map(state.set(id, { id, timestamp, title, body, author, category, voteScore, deleted }))
-
     default :
       return state
   }
@@ -53,7 +52,6 @@ function comments (state = new Map([]), action) {
       return state
   }
 }
-
 
 export default combineReducers({
   categories,

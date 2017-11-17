@@ -10,7 +10,7 @@ import PostSnippet from './PostSnippet'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
-import { fetchPosts } from '../actions'
+import { fetchPosts, fetchPostsByCategory } from '../actions'
 
 const styles = theme => ({
   root: {
@@ -28,7 +28,10 @@ const styles = theme => ({
 class PostsGrid extends React.Component {
 
   componentWillMount() {
-    !this.props.posts.length && this.props.dispatch(fetchPosts())
+    const { posts, category, dispatch } = this.props
+    !posts.length && !category ?
+    dispatch(fetchPosts()) :
+    dispatch(fetchPostsByCategory())
   }
 
   render() {
