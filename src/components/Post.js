@@ -9,7 +9,9 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { fetchPosts } from '../actions'
+import { fetchPosts, fetchComments } from '../actions'
+
+import Comment from './Comment'
 
 const styles = theme => ({
   paper: {
@@ -22,32 +24,47 @@ const styles = theme => ({
 class Post extends React.Component {
 
   componentWillMount() {
+    const id = this.props.id
+    !this.props.comments && this.props.dispatch(fetchComments(id))
     // change to fetch just one post
-    console.log(!this.props.title)
     !this.props.title && this.props.dispatch(fetchPosts())
   }
 
   render() {
-    console.log(this.props)
+    const { comments, classes, title, body} = this.props
+
+    const commentsRendered = []
+
+    comments && comments.forEach((comment) => {
+      const {body, author, id} = comment
+      commentsRendered.push(
+        <Comment
+        body={body}
+        author={author}
+        key={id} />
+      )
+    })
     return(
       <Grid item xs>
-        <Paper className={this.props.classes.paper}>
-          <h2>{this.props.title}</h2>
-          <p>{this.props.body}</p>
+        <Paper className={classes.paper}>
+          <h2>{title}</h2>
+          <p>{body}</p>
         </Paper>
+        {commentsRendered}
       </Grid>
     )
   }
   
 }
 
-function mapStateToProps ({ posts }, { match }) {
+function mapStateToProps ({ posts, comments }, { match }) {
   const id = match.params.id
   const [{ body="", title="" }={}] = posts.filter(post => post.id === id)
   return {
     title: title,
     body: body,
-    id: id
+    id: id,
+    comments: comments
   }
 }
 

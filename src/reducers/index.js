@@ -5,6 +5,7 @@ import {
   ADD_POST,
   RECEIVE_CATEGORIES,
   RECEIVE_POSTS,
+  RECEIVE_COMMENTS
 } from '../actions'
 
 function categories (state = [], action) {
@@ -39,7 +40,21 @@ function posts (state = [], action) {
   }
 }
 
+function comments (state = null, action) {
+  switch (action.type) {
+    case RECEIVE_COMMENTS :
+      console.log('reduce comments')
+      const { comments } = action
+      console.log(comments)
+      return comments
+    default :
+      return state
+  }
+}
+
+
 export default combineReducers({
   categories,
   posts,
+  comments
 })

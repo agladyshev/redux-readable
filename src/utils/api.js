@@ -14,6 +14,7 @@ export function fetchCategories () {
 }
 
 export function fetchComments (id) {
+	console.log(id)
 	return fetch(
 		`http://localhost:3001/posts/${id}/comments`,
 		{ headers: { 'Authorization': 'whatever-you-want' }})
