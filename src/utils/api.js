@@ -6,7 +6,6 @@ export function fetchPosts () {
 }
 
 export function fetchCategories () {
-	console.log("fetch")
 	return fetch(
 		'http://localhost:3001/categories',
 		{ headers: { 'Authorization': 'whatever-you-want' }})
@@ -14,9 +13,29 @@ export function fetchCategories () {
 }
 
 export function fetchComments (id) {
-	console.log(id)
 	return fetch(
 		`http://localhost:3001/posts/${id}/comments`,
+		{ headers: { 'Authorization': 'whatever-you-want' }})
+		.then((res) => res.json())
+}
+
+export function fetchPostsByCategory (category) {
+	return fetch(
+		`http://localhost:3001/${category}/posts`,
+		{ headers: { 'Authorization': 'whatever-you-want' }})
+		.then((res) => res.json())
+}
+
+export function fetchPost (id) {
+	return fetch(
+		`http://localhost:3001/posts/${id}`,
+		{ headers: { 'Authorization': 'whatever-you-want' }})
+		.then((res) => res.json())
+}
+
+export function fetchComment (id) {
+	return fetch(
+		`http://localhost:3001/comments/${id}`,
 		{ headers: { 'Authorization': 'whatever-you-want' }})
 		.then((res) => res.json())
 }

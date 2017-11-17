@@ -9,7 +9,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { fetchPosts, fetchComments } from '../actions'
+import { fetchPost, fetchComments } from '../actions'
 
 import Comment from './Comment'
 
@@ -25,18 +25,15 @@ class Post extends React.Component {
 
   componentWillMount() {
     const { id, comments, title, dispatch } = this.props
-    console.log(comments)
     // if post comments are undefined, fetch them from server
     !comments && dispatch(fetchComments(id))
     // change to fetch just one post
-    !title && dispatch(fetchPosts())
+    !title && dispatch(fetchPost(id))
   }
 
   render() {
     const { comments, classes, title, body} = this.props
-
     const commentsRendered = []
-
     comments && comments.forEach((comment) => {
       const {body, author, id} = comment
       commentsRendered.push(

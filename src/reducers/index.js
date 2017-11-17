@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux'
 
 import {
-  ADD_CATEGORY,
-  ADD_POST,
+  // ADD_CATEGORY,
+  // ADD_POST,
   RECEIVE_CATEGORIES,
   RECEIVE_POSTS,
-  RECEIVE_COMMENTS
+  RECEIVE_POST,
+  RECEIVE_COMMENTS,
+  RECEIVE_COMMENT,
 } from '../actions'
 
 function categories (state = [], action) {
@@ -13,12 +15,12 @@ function categories (state = [], action) {
     case RECEIVE_CATEGORIES:
       const { categories } = action
       return categories
-    case ADD_CATEGORY :
-      const { name, path } = action
-      return [
-        ...state,
-        {name, path}
-      ]
+    // case ADD_CATEGORY :
+    //   const { name, path } = action
+    //   return [
+    //     ...state,
+    //     {name, path}
+    //   ]
     default :
       return state
   }
@@ -29,7 +31,7 @@ function posts (state = [], action) {
     case RECEIVE_POSTS :
       const { posts } = action
       return posts
-    case ADD_POST :
+    case RECEIVE_POST :
       const { id, timestamp, title, body, author, category, voteScore, deleted } = action
       return [
         ...state,
@@ -43,9 +45,7 @@ function posts (state = [], action) {
 function comments (state = new Map([]), action) {
   switch (action.type) {
     case RECEIVE_COMMENTS :
-      console.log('reduce comments')
       const { id, comments } = action
-      console.log(comments)
       const newState = new Map(state)
       return newState.set(id, comments)
     default :
