@@ -22,6 +22,13 @@ const styles = theme => ({
 });
 
 class Post extends React.Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    comments: PropTypes.array,
+    classes: PropTypes.object.isRequired
+  }
 
   componentWillMount() {
     const { id, comments, title, dispatch } = this.props
@@ -57,9 +64,6 @@ class Post extends React.Component {
 
 function mapStateToProps ({ posts, comments }, { match }) {
   const id = match.params.id
-  console.log(id)
-  console.log(posts)
-   
   const { body="", title="" } = posts.has(id) ? posts.get(id) : {}
   const postComments = comments.get(id)
   return {

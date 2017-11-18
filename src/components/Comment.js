@@ -24,4 +24,10 @@ const Comment = (props) => (
   </Grid>
 )
 
+Comment.propTypes = {
+  author: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  classes: PropTypes.object.isRequired
+}
+
 export default withStyles(styles)(Comment)

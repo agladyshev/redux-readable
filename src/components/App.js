@@ -1,20 +1,13 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-
+import PropTypes from 'prop-types'
 import 'typeface-roboto'
 import ButtonAppBar from './ButtonAppBar'
-import AutoGrid from './AutoGrid'
 import Post from './Post'
 import PostsGrid from './PostsGrid'
 import LabelBottomNavigation from './LabelBottomNavigation'
 
-import { withStyles } from 'material-ui/styles';
-
-import { fetchPosts } from '../utils/api'
-import { fetchComments } from '../utils/api'
-
-// import { connect } from 'react-redux';
-import { compose } from 'redux'
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   root: {
@@ -54,14 +47,14 @@ class App extends Component {
           <Route exact path='/post/:id/edit' render={() => (
             <div className={classes.root}>
               <ButtonAppBar/>
-              <AutoGrid/>
+              <Post/>
               <LabelBottomNavigation/>
             </div>
           )}/>
           <Route exact path='/new' render={() => (
             <div className={classes.root}>
               <ButtonAppBar/>
-              <AutoGrid/>
+              <Post/>
               <LabelBottomNavigation/>
             </div>
           )}/>
@@ -71,14 +64,8 @@ class App extends Component {
   }
 }
 
-// function mapStateToProps ({ categories, posts }) {
-//   return {
-//     categories: categories,
-//     posts: posts
-//   }
-// }
+App.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
 
-export default compose(
-  withStyles(styles),
-  // connect(mapStateToProps),
-)(App)
+export default withStyles(styles)(App)

@@ -27,4 +27,11 @@ const PostSnippet = (props) => (
   </Grid>
 )
 
+PostSnippet.propTypes = {
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  classes: PropTypes.object.isRequired
+}
+
 export default withStyles(styles)(PostSnippet)

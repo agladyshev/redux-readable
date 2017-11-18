@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import { withRouter } from 'react-router-dom'
 
@@ -21,6 +20,14 @@ const styles = theme => ({
 });
 
 class PostsGrid extends React.Component {
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    categories: PropTypes.array.isRequired,
+    posts: PropTypes.array.isRequired,
+    match: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -92,11 +99,6 @@ class PostsGrid extends React.Component {
     );
   }
 }
-
-PostsGrid.propTypes = {
-  classes: PropTypes.object.isRequired,
-
-};
 
 function mapStateToProps ({ posts, categories }, { match }) {
   const category = match.params.category
