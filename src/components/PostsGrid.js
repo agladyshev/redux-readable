@@ -17,25 +17,47 @@ const styles = theme => ({
     flex: '1 1 auto',
     margin: '1rem',
     'overflow-x': 'hidden',
-  },
-  // paper: {
-  //   padding: 16,
-  //   textAlign: 'center',
-  //   color: theme.palette.text.secondary,
-  // },
+  }
 });
 
 class PostsGrid extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      categoriesLoaded: new Set([])
+    }
+  }
 
-  componentWillMount() {
-    const { posts, dispatch } = this.props
-    const { category } = this.props.match.params
-    console.log(!posts.length)
-    console.log(!category)
-    !posts.length && !category ?
-    // console.log('posts') : console.log('cat')
-    dispatch(fetchPosts()) :
-    dispatch(fetchPostsByCategory(category))
+  componentWillReceiveProps(newProps) {
+    const { dispatch, categories } = newProps
+    const { category } = newProps.match.params
+    const { categoriesLoaded } = this.state
+    if (!category) {
+      // if 'all' categories selected, check that all are loaded
+      if (categories.length !== categoriesLoaded.size) {
+        // if some are missing, calculate which are missing
+        const allCategories = new Set(categories.map(category => category.name))
+        const missingCategories = new Set([...allCategories]
+          .filter(category => !categoriesLoaded.has(category)))
+        // if one category is missing, load just one, else load all
+        // we can change the condition depending on the number of categories
+        // if there are many cats but few missing
+        // we can loop through missing set and load one by one
+        missingCategories.size === 1 ?
+        dispatch(fetchPostsByCategory(category)) : dispatch(fetchPosts())
+        this.setState({
+           categoriesLoaded: allCategories
+        })
+      }
+    } else {
+      // if single category selected, check if store has it already
+      if (!categoriesLoaded.has(category)) {
+        dispatch(fetchPostsByCategory(category))
+        this.setState((prevState) => ({
+           categoriesLoaded: new Set(prevState.categoriesLoaded.add(category))
+        }))
+      } 
+    }
   }
 
   render() {
@@ -76,14 +98,16 @@ PostsGrid.propTypes = {
 
 };
 
-function mapStateToProps ({ posts }, { match }) {
+function mapStateToProps ({ posts, categories }, { match }) {
   const category = match.params.category
   // convert store map to single array
   const postsArray = Array.from(posts, array => array[1])
   return !category ? {
     posts: postsArray,
+    categories: categories
   } : {
-    posts: postsArray.filter(post => post.category === category)
+    posts: postsArray.filter(post => post.category === category),
+    categories:categories
   }
 }
 
