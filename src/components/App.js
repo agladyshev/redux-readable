@@ -31,6 +31,13 @@ class App extends Component {
               <LabelBottomNavigation/>
             </div>
           )}/>
+          <Route exact path='/new' render={() => (
+            <div className={classes.root}>
+              <ButtonAppBar/>
+              <EditPost/>
+              <LabelBottomNavigation/>
+            </div>
+          )}/>
           <Route exact path='/:category' render={() => (
             <div className={classes.root}>
               <ButtonAppBar/>
@@ -46,13 +53,6 @@ class App extends Component {
             </div>
           )}/>
           <Route exact path='/post/:id/edit' render={() => (
-            <div className={classes.root}>
-              <ButtonAppBar/>
-              <EditPost/>
-              <LabelBottomNavigation/>
-            </div>
-          )}/>
-          <Route exact path='/new' render={() => (
             <div className={classes.root}>
               <ButtonAppBar/>
               <EditPost/>
