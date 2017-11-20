@@ -75,10 +75,14 @@ class Post extends React.Component {
           </Grid>
           <div>{body}</div>
           <Grid container>
-            <Grid item xs={6}>
-              <h6>by {author}</h6>
+            <Grid item xs={8}>
+              <h5>
+                <i className="material-icons">create</i>
+                {author}
+              </h5>
+
             </Grid>
-            <Grid item xs={6} className={classes.right}>
+            <Grid item xs={4} className={classes.right}>
               <h6 className={classes.icon}>
               <i className="material-icons">keyboard_arrow_left</i>
               {voteScore}

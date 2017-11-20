@@ -30,7 +30,9 @@ function ButtonAppBar(props) {
           <Typography type="title" color="inherit" className={classes.flex}>
             Readable
           </Typography>
-          <Button component={Link} to="/new" color="contrast">New post</Button>
+          <Button component={Link} to="/new" color="contrast">
+            <i className="material-icons">add_circle</i>
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
