@@ -47,7 +47,6 @@ class LabelBottomNavigation extends React.Component {
     // for (const icon of Icons) {
     //   console.log('here')
     // }
-    const { ...icons } = Icons
     const { classes, categories } = this.props
     const { value } = this.state
     const navBar =  []
@@ -61,7 +60,6 @@ class LabelBottomNavigation extends React.Component {
         to={{pathname:`/${path}`}}
         label={label}
         value={name}
-        showLabel="true"
         className={classes.button}
         icon={React.createElement(Icon, null)}
         key={name} />
@@ -71,7 +69,8 @@ class LabelBottomNavigation extends React.Component {
       <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
         <BottomNavigationButton 
           component={Link}
-          to="/" label="All"
+          to="/"
+          label="All"
           value="/"
           className={classes.button}
           icon={<HomeIcon />}>
