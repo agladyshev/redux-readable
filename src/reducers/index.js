@@ -7,7 +7,7 @@ import {
   RECEIVE_POSTS,
   RECEIVE_POST,
   RECEIVE_COMMENTS,
-  RECEIVE_COMMENT,
+  // RECEIVE_COMMENT,
 } from '../actions'
 
 function categories (state = [], action) {
