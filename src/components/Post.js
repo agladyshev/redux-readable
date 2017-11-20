@@ -4,7 +4,6 @@ import { withStyles } from 'material-ui/styles';
 
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
-import Badge from 'material-ui/Badge'
 
 import { compose } from 'redux' 
 import { connect } from 'react-redux'
