@@ -7,6 +7,7 @@ import {
   RECEIVE_POSTS,
   RECEIVE_POST,
   RECEIVE_COMMENTS,
+  RECEIVE_VOTE
   // RECEIVE_COMMENT,
 } from '../actions'
 
@@ -27,7 +28,6 @@ function categories (state = [], action) {
 }
 
 function posts (state = new Map([]), action) {
-
   switch (action.type) {
     case RECEIVE_POSTS :
       const { posts } = action
@@ -53,8 +53,19 @@ function comments (state = new Map([]), action) {
   }
 }
 
+function votes (state = new Map([]), action) {
+  switch (action.type) {
+    case RECEIVE_VOTE :
+      const { id, option } = action
+      return new Map(state.set(id, option))
+    default :
+      return state
+  }
+}
+
 export default combineReducers({
   categories,
   posts,
-  comments
+  comments,
+  votes
 })

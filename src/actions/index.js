@@ -5,6 +5,7 @@ export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST = 'RECEIVE_POST'
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
+export const RECEIVE_VOTE = 'RECEIVE_VOTE'
 
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
@@ -41,6 +42,11 @@ export const receiveComment = (comment) => ({
   comment
 })
 
+export const receiveVote = (id, option) => ({
+  type: RECEIVE_VOTE,
+  id,
+  option
+})
 
 export const fetchCategories = () => dispatch => (
   ServerAPIUtil
@@ -102,7 +108,10 @@ export const deletePost = (id) => dispatch => (
 export const votePost = (id, option) => dispatch => (
   ServerAPIUtil
     .votePost(id, option)
-    .then(post => dispatch(receivePost({...post})))
+    .then(post => {
+      dispatch(receivePost({...post}))
+      dispatch(receiveVote(id, option))
+    })
 )
 
 // export function addCategory ({ name, path }) {

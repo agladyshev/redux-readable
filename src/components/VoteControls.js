@@ -20,6 +20,7 @@ class VoteControls extends React.Component {
     id: PropTypes.string,
     voteScore: PropTypes.number,
     classes: PropTypes.object.isRequired,
+    currentVote: PropTypes.string,
   }
 
   constructor(props) {
@@ -28,8 +29,14 @@ class VoteControls extends React.Component {
   }
 
   handleVote(vote) {
-    const { id, dispatch } = this.props
-    dispatch(votePost(id, vote))
+    const { id, dispatch, currentVote } = this.props
+    if (!currentVote) {
+      dispatch(votePost(id, vote))
+    } else if (currentVote !== vote) {
+      // if person changes his vote, we have to call API twice
+      dispatch(votePost(id, vote))
+      dispatch(votePost(id, vote))
+    }
   }
 
   render() {
@@ -56,9 +63,15 @@ class VoteControls extends React.Component {
   }
 }
 
+function mapStateToProps ({ votes }, { id }) {
+  return {
+    currentVote: votes.get(id)
+  }
+}
+
 export default compose(
   withStyles(styles),
-  connect(),
+  connect(mapStateToProps),
   withRouter
 )(VoteControls)
 
