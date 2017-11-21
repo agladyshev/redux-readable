@@ -13,6 +13,8 @@ import { Add, Delete, ArrowBack, Create} from 'material-ui-icons'
 import { Link, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 
+import DeleteButton from './DeleteButton'
+
 const styles = theme => ({
   root: {
     flex: '0 1 auto',
@@ -57,11 +59,7 @@ function ButtonAppBar(props) {
           </Button>
           }
           {buttons.has("delete") &&
-          <Button 
-            className={classes.menuButton}
-            color="contrast"
-            ><Delete/>
-          </Button>
+          <DeleteButton id={match.params.id}/>
           }
         </Toolbar>
       </AppBar>

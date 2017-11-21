@@ -103,7 +103,9 @@ class PostsGrid extends React.Component {
 function mapStateToProps ({ posts, categories }, { match }) {
   const category = match.params.category
   // convert store map to single array
-  const postsArray = Array.from(posts, array => array[1])
+  // filter deleted posts before storage gets updated
+  const postsArray = Array.from(posts, array => array[1]).filter(post => !post.deleted)
+  console.log(postsArray)
   return !category ? {
     posts: postsArray,
     categories: categories

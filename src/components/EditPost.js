@@ -79,8 +79,6 @@ class Post extends React.Component {
   handleSubmit(event) {
     // alert('A name was submitted: ' + this.state.value);
     event.preventDefault()
-    console.log(this.state)
-    console.log(this.props)
     const { title, body, author, category} = this.state
     const { history, dispatch, id } = this.props
     if (this.props.id) {

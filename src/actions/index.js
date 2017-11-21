@@ -1,14 +1,10 @@
 import * as ServerAPIUtil from '../utils/api'
 
-// export const ADD_CATEGORY = 'ADD_CATEGORY'
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST = 'RECEIVE_POST'
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
-// export const ADD_POST = 'ADD_POST'
-export const EDIT_POST = 'EDIT_POST'
-
 
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
@@ -25,11 +21,6 @@ export const receiveComments = (id, comments) => ({
   comments,
   id
 })
-
-// export const receivePost = post => ({
-//   type: RECEIVE_POST,
-//   post 
-// })
 
 export function receivePost ({ id, timestamp, title, body, author, category, voteScore, deleted }) {
   return {
@@ -99,6 +90,12 @@ export const editPost = (post) => dispatch => (
   ServerAPIUtil
     .editPost(post)
     // .then(res => console.log(res))
+    .then(post => dispatch(receivePost({...post})))
+)
+
+export const deletePost = (id) => dispatch => (
+  ServerAPIUtil
+    .deletePost(id)
     .then(post => dispatch(receivePost({...post})))
 )
 
