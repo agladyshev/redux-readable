@@ -80,16 +80,15 @@ class Post extends React.Component {
     // alert('A name was submitted: ' + this.state.value);
     event.preventDefault()
     console.log(this.state)
-    console.log(this.props.id)
+    console.log(this.props)
     const { title, body, author, category} = this.state
-    const { dispatch, id } = this.props
+    const { history, dispatch, id } = this.props
     if (this.props.id) {
       dispatch(editPost({ title, body, author, category, id }))
-      console.log('edit post')
     } else {
-      console.log('new post')
       dispatch(newPost({ title, body, author, category }))
     }
+    history.push('/')
   }
 
   componentWillMount() {
@@ -137,6 +136,7 @@ class Post extends React.Component {
                 value={title}
                 onChange={this.handleChange('title')}
                 margin="normal"
+                required={true}
               />
             </Grid>
             <Grid item xs={2} className={classes.right}>
@@ -152,6 +152,7 @@ class Post extends React.Component {
                 onChange={this.handleChange('body')}
                 className={classes.textField}
                 margin="normal"
+                required={true}
               />
             </Grid>
             <Grid item xs={8}>
@@ -162,6 +163,7 @@ class Post extends React.Component {
                 value={author}
                 onChange={this.handleChange('author')}
                 margin="normal"
+                required={true}
               />
             </Grid>
             <Grid item xs={8}>
@@ -171,6 +173,7 @@ class Post extends React.Component {
                   value={category}
                   onChange={this.handleChange('category')}
                   input={<Input id="category" />}
+                  required={true}
                 >
                 {categoriesMenu}
                 </Select>
