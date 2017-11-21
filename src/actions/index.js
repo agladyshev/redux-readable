@@ -38,7 +38,7 @@ export function receivePost ({ id, timestamp, title, body, author, category, vot
 }
 
 export const receiveComment = (comment) => ({
-  type: RECEIVE_COMMENTS,
+  type: RECEIVE_COMMENT,
   comment
 })
 
@@ -112,6 +112,12 @@ export const votePost = (id, option) => dispatch => (
       dispatch(receivePost({...post}))
       dispatch(receiveVote(id, option))
     })
+)
+
+export const newComment = (parent, author, body) => dispatch => (
+  ServerAPIUtil
+    .newComment(parent, author, body)
+    .then(comment => dispatch(receiveComment(comment)))
 )
 
 // export function addCategory ({ name, path }) {

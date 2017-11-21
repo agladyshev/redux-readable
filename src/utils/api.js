@@ -103,3 +103,22 @@ export function votePost (id, option) {
     })
     .then((res) => res.json())
 }
+
+export function newComment (body, author, parent) {
+  return fetch(
+    `http://localhost:3001/comments`,
+    { headers: { 
+      'Authorization': 'whatever-you-want',
+      'Content-Type': 'application/json' 
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        id: uuidv4(),
+        parentId: parent,
+        timestamp: Date.now(),
+        body: body,
+        author: author
+      })
+    })
+    .then((res) => res.json())
+}

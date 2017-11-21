@@ -7,6 +7,7 @@ import {
   RECEIVE_POSTS,
   RECEIVE_POST,
   RECEIVE_COMMENTS,
+  RECEIVE_COMMENT,
   RECEIVE_VOTE
   // RECEIVE_COMMENT,
 } from '../actions'
@@ -43,11 +44,15 @@ function posts (state = new Map([]), action) {
 }
 
 function comments (state = new Map([]), action) {
+  const newState = new Map(state)
   switch (action.type) {
     case RECEIVE_COMMENTS :
-      const { id, comments } = action
-      const newState = new Map(state)
-      return newState.set(id, comments)
+      // console.log(action)
+      const { id:postId, comments:comments } = action
+      return newState.set(postId, comments)
+    case RECEIVE_COMMENT :
+      const { id, timestamp, body, author, voteScore, deleted, parentId } = action
+      return newState.set(id, { id, parentId, timestamp, body, author, voteScore, deleted })
     default :
       return state
   }
