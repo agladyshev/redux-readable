@@ -69,6 +69,7 @@ class PostsGrid extends React.Component {
 
   render() {
     const { classes, posts} = this.props
+    console.log(posts)
     const postsRendered = [] 
     for (const post of posts) {
       const {author, body, commentCount, timestamp, title, voteScore, id} = post
@@ -104,6 +105,8 @@ function mapStateToProps ({ posts, categories }, { match }) {
   const category = match.params.category
   // convert store map to single array
   const postsArray = Array.from(posts, array => array[1])
+  console.log(postsArray)
+  console.log(!category)
   return !category ? {
     posts: postsArray,
     categories: categories

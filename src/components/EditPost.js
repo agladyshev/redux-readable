@@ -16,7 +16,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { fetchPost, fetchComments, fetchCategories } from '../actions'
+import { fetchPost, fetchComments, fetchCategories, newPost } from '../actions'
 
 import Comment from './Comment'
 
@@ -67,6 +67,7 @@ class Post extends React.Component {
       category: props.category,
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange = name => event => {
@@ -75,16 +76,30 @@ class Post extends React.Component {
     });
   }
 
+  handleSubmit(event) {
+    // alert('A name was submitted: ' + this.state.value);
+    event.preventDefault()
+    console.log(this.state)
+    console.log(this.props.id)
+    const { title, body, author, category} = this.state
+    const { dispatch, id } = this.props
+    if (this.props.id) {
+      console.log('edit post')
+    } else {
+      console.log('new post')
+      dispatch(newPost({ title, body, author, category }))
+    }
+  }
+
   componentWillMount() {
     const { id, title, dispatch, categories } = this.props
     // if post exists but not loaded, fetch it from server
+    // console.log(id && !title)
     id && !title && dispatch(fetchPost(id))
     // this might cause constant re-render if id is invalid
-    // !categories.length && dispatch(fetchCategories())
   }
 
   componentWillReceiveProps(newProps) {
-    console.log(newProps)
     this.setState({
       title: newProps.title,
       body: newProps.body,
@@ -96,8 +111,6 @@ class Post extends React.Component {
   render() {
     const { classes, categories } = this.props
     const { title, author, body, category } = this.state
-    console.log(this.state)
-    console.log(categories)
     const categoriesMenu = []
     for (const category of categories) {
       const { name } = category
@@ -111,10 +124,10 @@ class Post extends React.Component {
       )
     }    
     return(
-      <form className={classes.root}>
+      <form className={classes.root} onSubmit={this.handleSubmit}>
         <Paper className={classes.paper}>
           <Grid container>
-            <Grid item xs={8}>
+            <Grid item xs={10}>
               <TextField
                 id="title"
                 label="Title"
@@ -125,7 +138,7 @@ class Post extends React.Component {
                 margin="normal"
               />
             </Grid>
-            <Grid item xs={4} className={classes.right}>
+            <Grid item xs={2} className={classes.right}>
               <h6><i className="material-icons">delete</i></h6>
             </Grid>
             <Grid item xs={8}>
@@ -164,7 +177,7 @@ class Post extends React.Component {
             </Grid>
             <Grid item xs={4}>
               <div className={classes.right}>
-                <Button className={classes.button} raised color="primary">
+                <Button type="submit" className={classes.button} raised color="primary">
                   <Done className={classes.leftIcon} />
                   Done
                 </Button>
@@ -178,8 +191,8 @@ class Post extends React.Component {
 }
 
 function mapStateToProps ({ posts, categories }, { match }) {
-  const { id='new' } = match.params
-  const { body="", title="", author="", category="" } = posts.has(id) ? posts.get(id) : {}
+  const pathId = match.params.id
+  const { body="", title="", author="", category="", id=pathId } = posts.has(pathId) ? posts.get(pathId) : {}
   return {
     title: title,
     body: body,
