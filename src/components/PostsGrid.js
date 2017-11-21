@@ -105,7 +105,6 @@ function mapStateToProps ({ posts, categories }, { match }) {
   // convert store map to single array
   // filter deleted posts before storage gets updated
   const postsArray = Array.from(posts, array => array[1]).filter(post => !post.deleted)
-  console.log(postsArray)
   return !category ? {
     posts: postsArray,
     categories: categories

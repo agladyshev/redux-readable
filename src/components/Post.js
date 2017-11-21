@@ -12,6 +12,7 @@ import { withRouter, Link } from 'react-router-dom'
 import { fetchPost, fetchComments } from '../actions'
 
 import Comment from './Comment'
+import VoteControls from './VoteControls'
 
 import moment from 'moment'
 
@@ -78,11 +79,7 @@ class Post extends React.Component {
               <h5>by {author}</h5>
             </Grid>
             <Grid item xs={4} className={classes.right}>
-              <h6>
-              <i className="material-icons">keyboard_arrow_left</i>
-              {voteScore}
-              <i className="material-icons">keyboard_arrow_right</i>
-              </h6>
+              <h5><VoteControls voteScore={voteScore} id={id}/></h5>
             </Grid>
           </Grid>
         </Paper>

@@ -27,8 +27,6 @@ class DeleteButton extends React.Component {
   }
 
   handleDelete(event) {
-    console.log(this.props)
-    console.log('here')
     const { id, history, dispatch } = this.props
     dispatch(deletePost(id))
     history.push('/')

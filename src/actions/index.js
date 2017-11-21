@@ -99,6 +99,12 @@ export const deletePost = (id) => dispatch => (
     .then(post => dispatch(receivePost({...post})))
 )
 
+export const votePost = (id, option) => dispatch => (
+  ServerAPIUtil
+    .votePost(id, option)
+    .then(post => dispatch(receivePost({...post})))
+)
+
 // export function addCategory ({ name, path }) {
 //   return {
 //     type: ADD_CATEGORY,

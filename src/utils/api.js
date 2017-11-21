@@ -64,8 +64,10 @@ export function editPost (post) {
   const { id, body, title, category, author } = post
   return fetch(
     `http://localhost:3001/posts/${id}`,
-    { headers: { 'Authorization': 'whatever-you-want',
-                 'Content-Type': 'application/json' },
+    { headers: { 
+      'Authorization': 'whatever-you-want',
+      'Content-Type': 'application/json' 
+      },
       method: 'PUT',
       body: JSON.stringify({
         id: id,
@@ -83,6 +85,21 @@ export function deletePost (id) {
     `http://localhost:3001/posts/${id}`,
     { headers: { 'Authorization': 'whatever-you-want'},
       method: 'DELETE'
+    })
+    .then((res) => res.json())
+}
+
+export function votePost (id, option) {
+  return fetch(
+    `http://localhost:3001/posts/${id}`,
+    { headers: { 
+      'Authorization': 'whatever-you-want',
+      'Content-Type': 'application/json' 
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        option: option
+      })
     })
     .then((res) => res.json())
 }
