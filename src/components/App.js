@@ -26,35 +26,35 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render={() => (
             <div className={classes.root}>
-              <ButtonAppBar/>         
+              <ButtonAppBar buttons={new Set(["add"])}/>         
               <PostsGrid/>
               <LabelBottomNavigation/>
             </div>
           )}/>
           <Route exact path='/new' render={() => (
             <div className={classes.root}>
-              <ButtonAppBar/>
+              <ButtonAppBar buttons={new Set(["back"])}/>
               <EditPost/>
               <LabelBottomNavigation/>
             </div>
           )}/>
           <Route exact path='/:category' render={() => (
             <div className={classes.root}>
-              <ButtonAppBar/>
+              <ButtonAppBar buttons={new Set(["add"])}/>
               <PostsGrid/>
               <LabelBottomNavigation/>
             </div>
           )}/>
           <Route exact path='/post/:id' render={() => (
             <div className={classes.root}>
-              <ButtonAppBar/>
+              <ButtonAppBar buttons={new Set(["back", "delete", "edit"])}/>
               <Post/>
               <LabelBottomNavigation/>
             </div>
           )}/>
           <Route exact path='/post/:id/edit' render={() => (
             <div className={classes.root}>
-              <ButtonAppBar/>
+              <ButtonAppBar buttons={new Set(["back", "delete"])}/>
               <EditPost/>
               <LabelBottomNavigation/>
             </div>

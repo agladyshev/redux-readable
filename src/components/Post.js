@@ -75,13 +75,7 @@ class Post extends React.Component {
           <div>{body}</div>
           <Grid container>
             <Grid item xs={8}>
-              <h5>
-                <Link to={{pathname: `/post/${id}/edit`}}>
-                  by {author}
-                  <i className="material-icons">create</i>
-                </Link>
-              </h5>
-
+              <h5>by {author}</h5>
             </Grid>
             <Grid item xs={4} className={classes.right}>
               <h6>

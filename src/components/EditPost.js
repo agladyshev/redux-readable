@@ -44,7 +44,7 @@ const styles = theme => ({
   formControl: {
     // margin: theme.spacing.unit,
     minWidth: 120,
-  },
+  }
 });
 
 class Post extends React.Component {
@@ -127,7 +127,7 @@ class Post extends React.Component {
       <form className={classes.root} onSubmit={this.handleSubmit}>
         <Paper className={classes.paper}>
           <Grid container>
-            <Grid item xs={10}>
+            <Grid item xs={12}>
               <TextField
                 id="title"
                 label="Title"
@@ -138,9 +138,6 @@ class Post extends React.Component {
                 margin="normal"
                 required={true}
               />
-            </Grid>
-            <Grid item xs={2} className={classes.right}>
-              <h6><i className="material-icons">delete</i></h6>
             </Grid>
             <Grid item xs={8}>
               <TextField
