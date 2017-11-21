@@ -59,3 +59,21 @@ export function newPost (post) {
     })
     .then((res) => res.json())
 }
+
+export function editPost (post) {
+  const { id, body, title, category, author } = post
+  return fetch(
+    `http://localhost:3001/posts/${id}`,
+    { headers: { 'Authorization': 'whatever-you-want',
+                 'Content-Type': 'application/json' },
+      method: 'PUT',
+      body: JSON.stringify({
+        id: id,
+        title: title,
+        body: body,
+        author: author,
+        category: category
+      })
+    })
+    .then((res) => res.json())
+}

@@ -95,6 +95,13 @@ export const newPost = (post) => dispatch => (
     .then(post => dispatch(receivePost({...post})))
 )
 
+export const editPost = (post) => dispatch => (
+  ServerAPIUtil
+    .editPost(post)
+    // .then(res => console.log(res))
+    .then(post => dispatch(receivePost({...post})))
+)
+
 // export function addCategory ({ name, path }) {
 //   return {
 //     type: ADD_CATEGORY,

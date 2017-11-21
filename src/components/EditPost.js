@@ -16,7 +16,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { fetchPost, fetchComments, fetchCategories, newPost } from '../actions'
+import { fetchPost, fetchComments, fetchCategories, newPost, editPost } from '../actions'
 
 import Comment from './Comment'
 
@@ -84,6 +84,7 @@ class Post extends React.Component {
     const { title, body, author, category} = this.state
     const { dispatch, id } = this.props
     if (this.props.id) {
+      dispatch(editPost({ title, body, author, category, id }))
       console.log('edit post')
     } else {
       console.log('new post')
