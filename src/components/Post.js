@@ -7,7 +7,7 @@ import Grid from 'material-ui/Grid';
 
 import { compose } from 'redux' 
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 import { fetchPost, fetchComments } from '../actions'
 
@@ -50,7 +50,7 @@ class Post extends React.Component {
   }
 
   render() {
-    const { comments, classes, title, body, author, timestamp, voteScore} = this.props
+    const { comments, classes, title, body, author, timestamp, voteScore, id} = this.props
     const commentsRendered = []
     comments && comments.forEach((comment) => {
       const {body, author, id} = comment
@@ -76,13 +76,15 @@ class Post extends React.Component {
           <Grid container>
             <Grid item xs={8}>
               <h5>
-                <i className="material-icons">create</i>
-                {author}
+                <Link to={{pathname: `/post/${id}/edit`}}>
+                  by {author}
+                  <i className="material-icons">create</i>
+                </Link>
               </h5>
 
             </Grid>
             <Grid item xs={4} className={classes.right}>
-              <h6 className={classes.icon}>
+              <h6>
               <i className="material-icons">keyboard_arrow_left</i>
               {voteScore}
               <i className="material-icons">keyboard_arrow_right</i>
