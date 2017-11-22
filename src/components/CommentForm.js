@@ -69,47 +69,44 @@ class CommentForm extends React.Component {
     const { classes } = this.props
     const { author="", body="" } = this.state
     return (
-      <Paper className={classes.paper}>
-        <div>Your reply</div>
-        <form className={classes.root} onSubmit={this.handleSubmit}>
-          <Paper className={classes.paper}>
-            <Grid container>
-              <Grid item xs={8}>
-                <TextField
-                  id="author"
-                  label="Author"
-                  className={classes.textField}
-                  value={author}
-                  onChange={this.handleChange('author')}
-                  margin="normal"
-                  required={true}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  id="body"
-                  label="Comment"
-                  multiline
-                  fullWidth
-                  value={body}
-                  onChange={this.handleChange('body')}
-                  className={classes.textField}
-                  margin="normal"
-                  required={true}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <div className={classes.right}>
-                  <Button type="submit" className={classes.button} raised color="primary">
-                    <Done className={classes.leftIcon} />
-                    Post
-                  </Button>
-                </div>
-              </Grid>
+      <form className={classes.root} onSubmit={this.handleSubmit}>
+        <Paper className={classes.paper}>
+          <Grid container>
+            <Grid item xs={8}>
+              <TextField
+                id="author"
+                label="Author"
+                className={classes.textField}
+                value={author}
+                onChange={this.handleChange('author')}
+                margin="normal"
+                required={true}
+              />
             </Grid>
-          </Paper>
-        </form>
-      </Paper>
+            <Grid item xs={12}>
+              <TextField
+                id="body"
+                label="Comment"
+                multiline
+                fullWidth
+                value={body}
+                onChange={this.handleChange('body')}
+                className={classes.textField}
+                margin="normal"
+                required={true}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <div className={classes.right}>
+                <Button type="submit" className={classes.button} raised color="primary">
+                  <Done className={classes.leftIcon} />
+                  Post
+                </Button>
+              </div>
+            </Grid>
+          </Grid>
+        </Paper>
+      </form>
     )
   }
 }

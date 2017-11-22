@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import 'typeface-roboto'
 import ButtonAppBar from './ButtonAppBar'
 import Post from './Post'
-import EditPost from './EditPost'
+import PostForm from './PostForm'
 import PostsGrid from './PostsGrid'
 import LabelBottomNavigation from './LabelBottomNavigation'
 
@@ -34,7 +34,7 @@ class App extends Component {
           <Route exact path='/new' render={() => (
             <div className={classes.root}>
               <ButtonAppBar buttons={new Set(["back"])}/>
-              <EditPost/>
+              <PostForm/>
               <LabelBottomNavigation/>
             </div>
           )}/>
@@ -55,7 +55,7 @@ class App extends Component {
           <Route exact path='/post/:id/edit' render={() => (
             <div className={classes.root}>
               <ButtonAppBar buttons={new Set(["back", "delete"])}/>
-              <EditPost/>
+              <PostForm/>
               <LabelBottomNavigation/>
             </div>
           )}/>

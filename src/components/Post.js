@@ -4,6 +4,8 @@ import { withStyles } from 'material-ui/styles';
 
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
+import CommentIcon from 'material-ui-icons/Comment'
+import Button from 'material-ui/Button'
 
 import { compose } from 'redux' 
 import { connect } from 'react-redux'
@@ -29,7 +31,13 @@ const styles = theme => ({
   },
   right: {
     textAlign: 'right'
-  }
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit,
+  },
 });
 
 class Post extends React.Component {
@@ -47,8 +55,16 @@ class Post extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      edit: false
     }
-  }  
+    this.toggleEdit = this.toggleEdit.bind(this)
+  }
+
+  toggleEdit(event) {
+    this.setState((prevState) => {
+      return {edit: !prevState.edit}
+    })
+  }
 
   componentWillMount() {
     const { id, comments, title, dispatch } = this.props
@@ -57,8 +73,15 @@ class Post extends React.Component {
     !title && dispatch(fetchPost(id))
   }
 
+  componentWillReceiveProps() {
+    this.setState({
+      edit: false
+    })
+  }
+
   render() {
     const { comments, classes, title, body, author, timestamp, voteScore, id} = this.props
+    const { edit } = this.state
     const commentsRendered = []
     comments.forEach((comment) => {
       const {body, author, id, deleted, timestamp, voteScore, parentId} = comment
@@ -94,10 +117,28 @@ class Post extends React.Component {
               <h5><VoteControls voteScore={voteScore} id={id}/></h5>
             </Grid>
           </Grid>
+          <Grid container>
+            <Grid item xs={4}>
+              <h5>Comments: {comments.length}</h5>
+            </Grid>
+            <Grid item xs={8} className={classes.right}>
+              <Button 
+                className={classes.button}
+                raised color="accent"
+                onClick={this.toggleEdit}>
+                Reply
+                <CommentIcon className={classes.rightIcon}/>
+              </Button>
+            </Grid>
+          </Grid>
         </Paper>
+        {edit && 
         <Grid item xs>
-          <CommentForm parent={id}/>
+          <Paper className={classes.paper}>
+            <CommentForm parent={id}/>
+          </Paper>
         </Grid>
+        }
         <Grid item xs>
           {commentsRendered}
         </Grid>
