@@ -47,12 +47,12 @@ function comments (state = new Map([]), action) {
   const newState = new Map(state)
   switch (action.type) {
     case RECEIVE_COMMENTS :
-      // console.log(action)
       const { id:postId, comments:comments } = action
       return newState.set(postId, comments)
     case RECEIVE_COMMENT :
-      const { id, timestamp, body, author, voteScore, deleted, parentId } = action
-      return newState.set(id, { id, parentId, timestamp, body, author, voteScore, deleted })
+      const { id, timestamp, body, author, voteScore, deleted, parentId, parentDeleted } = action.comment
+      return newState.set(parentId, [...newState.get(parentId), 
+        { id, parentId, timestamp, body, author, voteScore, deleted, parentDeleted }])
     default :
       return state
   }

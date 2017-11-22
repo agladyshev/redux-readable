@@ -60,7 +60,6 @@ class Post extends React.Component {
   render() {
     const { comments, classes, title, body, author, timestamp, voteScore, id} = this.props
     const commentsRendered = []
-    console.log(comments)
     comments && comments.forEach((comment) => {
       const {body, author, id} = comment
       commentsRendered.push(
@@ -95,7 +94,6 @@ class Post extends React.Component {
           <NewComment parent={id}/>
         </Grid>
         <Grid item xs>
-
           {commentsRendered}
         </Grid>
       </div>
@@ -107,7 +105,6 @@ function mapStateToProps ({ posts, comments }, { match }) {
   const id = match.params.id
   const { body="", title="", author="", timestamp=0, voteScore=0 } = posts.has(id) ? posts.get(id) : {}
   const postComments = comments.get(id)
-  console.log(postComments)
   return {
     title: title,
     body: body,

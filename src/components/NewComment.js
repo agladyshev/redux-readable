@@ -47,19 +47,18 @@ class NewComment extends React.Component {
   }
 
   handleChange = name => event => {
-    console.log('change')
     this.setState({
       [name]: event.target.value,
     });
   }
 
   handleSubmit(event) {
-    console.log('here')
     // // alert('A name was submitted: ' + this.state.value);
     event.preventDefault()
     const { body, author} = this.state
     const { dispatch, parent } = this.props
     dispatch(newComment(body, author, parent))
+    this.setState({body: "", author: ""})
   }
 
   render() {
