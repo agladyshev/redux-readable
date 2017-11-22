@@ -5,8 +5,10 @@ import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button'
-import DeleteButton from './DeleteButton'
 import Create from 'material-ui-icons/Create'
+
+import DeleteButton from './DeleteButton'
+import VoteControls from './VoteControls'
 
 import moment from 'moment'
 
@@ -45,6 +47,14 @@ const Comment = (props) => (
       </Grid>
     </Grid>
     <p>{props.body}</p>
+    <Grid container>
+      <Grid item xs={12} className={props.classes.right}>
+        <VoteControls 
+          parentId={props.parentId}
+          id={props.id}
+          voteScore={props.voteScore}/>
+      </Grid>
+    </Grid>
   </Paper>
 )
 

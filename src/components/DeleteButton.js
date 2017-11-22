@@ -30,7 +30,6 @@ class DeleteButton extends React.Component {
 
   handleDelete(event) {
     const { parentId, id, history, dispatch } = this.props
-    console.log(parentId)
     parentId ? dispatch(deleteComment(id)) : dispatch(deletePost(id))
   }
 

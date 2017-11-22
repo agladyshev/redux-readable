@@ -52,9 +52,7 @@ function comments (state = new Map([]), action) {
       allComments.forEach(comment => commentsById.set(comment.id, comment))
       return newState.set(postId, commentsById)
     case RECEIVE_COMMENT :
-      console.log(action)
       const { id, timestamp, body, author, voteScore, deleted, parentId, parentDeleted } = action.comment
-      
       return newState.set(parentId, newState.get(parentId).set(id,  
         { id, parentId, timestamp, body, author, voteScore, deleted, parentDeleted }))
     default :

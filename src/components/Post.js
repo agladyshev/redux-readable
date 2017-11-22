@@ -60,7 +60,6 @@ class Post extends React.Component {
   render() {
     const { comments, classes, title, body, author, timestamp, voteScore, id} = this.props
     const commentsRendered = []
-    console.log(comments)
     comments.forEach((comment) => {
       const {body, author, id, deleted, timestamp, voteScore, parentId} = comment
       commentsRendered.push(
@@ -112,7 +111,6 @@ function mapStateToProps ({ posts, comments }, { match }) {
   const { body="", title="", author="", timestamp=0, voteScore=0 } = posts.has(id) ? posts.get(id) : {}
   const commentsArray = Array.from((comments.get(id) || []), array => array[1])
     .filter(comment => !comment.deleted)
-  console.log(commentsArray)
 
   return {
     title: title,

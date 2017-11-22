@@ -6,7 +6,7 @@ import Button from 'material-ui/Button'
 import { KeyboardArrowLeft, KeyboardArrowRight } from 'material-ui-icons'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { votePost } from '../actions'
+import { votePost, voteComment } from '../actions'
 
 const styles = theme => ({
   menuButton: {
@@ -17,7 +17,8 @@ const styles = theme => ({
 
 class VoteControls extends React.Component {
   static propTypes = {
-    id: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    parentId: PropTypes.string,
     voteScore: PropTypes.number,
     classes: PropTypes.object.isRequired,
     currentVote: PropTypes.string,
@@ -29,13 +30,13 @@ class VoteControls extends React.Component {
   }
 
   handleVote(vote) {
-    const { id, dispatch, currentVote } = this.props
+    const { parentId, id, dispatch, currentVote } = this.props
     if (!currentVote) {
-      dispatch(votePost(id, vote))
+      parentId ? dispatch(voteComment(id, vote)) : dispatch(votePost(id, vote))
     } else if (currentVote !== vote) {
       // if person changes his vote, we have to call API twice
-      dispatch(votePost(id, vote))
-      dispatch(votePost(id, vote))
+      parentId ? dispatch(voteComment(id, vote)) : dispatch(votePost(id, vote))
+      parentId ? dispatch(voteComment(id, vote)) : dispatch(votePost(id, vote))
     }
   }
 

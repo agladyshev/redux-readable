@@ -131,3 +131,18 @@ export function deleteComment (id) {
     })
     .then((res) => res.json())
 }
+
+export function voteComment (id, option) {
+  return fetch(
+    `http://localhost:3001/comments/${id}`,
+    { headers: { 
+      'Authorization': 'whatever-you-want',
+      'Content-Type': 'application/json' 
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        option: option
+      })
+    })
+    .then((res) => res.json())
+}

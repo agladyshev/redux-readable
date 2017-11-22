@@ -125,3 +125,12 @@ export const deleteComment = id => dispatch => (
     .deleteComment(id)
     .then(comment => dispatch(receiveComment(comment)))
 )
+
+export const voteComment = (id, option) => dispatch => (
+  ServerAPIUtil
+    .voteComment(id, option)
+    .then(comment => {
+      dispatch(receiveComment({...comment}))
+      dispatch(receiveVote(id, option))
+    })
+)
