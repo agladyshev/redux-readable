@@ -14,6 +14,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 
 import DeleteButton from './DeleteButton'
+import SortControls from './SortControls'
 
 const styles = theme => ({
   root: {
@@ -37,6 +38,9 @@ function ButtonAppBar(props) {
           <Typography type="title" color="inherit" className={classes.flex}>
             Readable
           </Typography>
+          {buttons.has("sort") &&
+          <SortControls/>
+          }
           {buttons.has("back") &&
           <Button onClick={history.goBack} color="contrast" className={classes.menuButton}>
             <ArrowBack/>

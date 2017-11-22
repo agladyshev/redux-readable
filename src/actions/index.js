@@ -6,6 +6,7 @@ export const RECEIVE_POST = 'RECEIVE_POST'
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
 export const RECEIVE_VOTE = 'RECEIVE_VOTE'
+export const CHANGE_SORT_METHOD = 'CHANGE_SORT_METHOD'
 
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
@@ -48,6 +49,13 @@ export const receiveVote = (id, option) => ({
   id,
   option
 })
+
+export const changeSortMethod = (sort) => ({
+  type: CHANGE_SORT_METHOD,
+  sort
+})
+
+// Middleware methods below
 
 export const fetchCategories = () => dispatch => (
   ServerAPIUtil

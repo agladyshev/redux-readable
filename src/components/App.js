@@ -26,7 +26,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render={() => (
             <div className={classes.root}>
-              <ButtonAppBar buttons={new Set(["add"])}/>         
+              <ButtonAppBar buttons={new Set(["add", "sort"])}/>         
               <PostsGrid/>
               <LabelBottomNavigation/>
             </div>
@@ -40,7 +40,7 @@ class App extends Component {
           )}/>
           <Route exact path='/:category' render={() => (
             <div className={classes.root}>
-              <ButtonAppBar buttons={new Set(["add"])}/>
+              <ButtonAppBar buttons={new Set(["add", "sort"])}/>
               <PostsGrid/>
               <LabelBottomNavigation/>
             </div>

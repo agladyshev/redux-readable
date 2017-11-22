@@ -8,7 +8,8 @@ import {
   RECEIVE_POST,
   RECEIVE_COMMENTS,
   RECEIVE_COMMENT,
-  RECEIVE_VOTE
+  RECEIVE_VOTE,
+  CHANGE_SORT_METHOD
   // RECEIVE_COMMENT,
 } from '../actions'
 
@@ -70,9 +71,20 @@ function votes (state = new Map([]), action) {
   }
 }
 
+function sort (state = "timestamp", action) {
+  switch (action.type) {
+    case CHANGE_SORT_METHOD :
+      const { sort } = action
+      return sort
+    default :
+      return state
+  }
+}
+
 export default combineReducers({
   categories,
   posts,
   comments,
-  votes
+  votes,
+  sort
 })
