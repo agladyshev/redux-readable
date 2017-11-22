@@ -36,8 +36,8 @@ function posts (state = new Map([]), action) {
       posts.forEach(post => newState.set(post.id, post))
       return newState
     case RECEIVE_POST :
-      const { id, timestamp, title, body, author, category, voteScore, deleted } = action
-      return new Map(state.set(id, { id, timestamp, title, body, author, category, voteScore, deleted }))
+      const { id, timestamp, title, body, author, category, voteScore, deleted, commentCount } = action
+      return new Map(state.set(id, { id, timestamp, title, body, author, category, voteScore, deleted, commentCount }))
     default :
       return state
   }

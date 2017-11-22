@@ -23,7 +23,7 @@ export const receiveComments = (id, comments) => ({
   id
 })
 
-export function receivePost ({ id, timestamp, title, body, author, category, voteScore, deleted }) {
+export function receivePost ({ id, timestamp, title, body, author, category, voteScore, deleted, commentCount }) {
   return {
     type: RECEIVE_POST,
     id,
@@ -33,7 +33,8 @@ export function receivePost ({ id, timestamp, title, body, author, category, vot
     author,
     category,
     voteScore,
-    deleted
+    deleted,
+    commentCount
   }
 }
 

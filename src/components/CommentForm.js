@@ -25,7 +25,6 @@ const styles = theme => ({
     textAlign: 'right'
   },
   formControl: {
-    // margin: theme.spacing.unit,
     minWidth: 120,
   }
 });

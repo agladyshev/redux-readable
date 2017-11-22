@@ -139,7 +139,7 @@ class Post extends React.Component {
           </Paper>
         </Grid>
         }
-        <Grid item xs>
+        <Grid item xs id="comments">
           {commentsRendered}
         </Grid>
       </div>

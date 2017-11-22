@@ -69,7 +69,7 @@ class PostsGrid extends React.Component {
 
   render() {
     const { classes, posts} = this.props
-    const postsRendered = [] 
+    const postsRendered = []
     for (const post of posts) {
       const {author, body, commentCount, timestamp, title, voteScore, id} = post
       postsRendered.push(

@@ -4,34 +4,84 @@ import { withStyles } from 'material-ui/styles';
 
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
+import Button from 'material-ui/Button'
+import DeleteButton from './DeleteButton'
+import Create from 'material-ui-icons/Create'
 
 import { Link } from 'react-router-dom'
+
+import moment from 'moment'
+
+import VoteControls from './VoteControls'
 
 const styles = theme => ({
   paper: {
     padding: 16,
-    textAlign: 'center',
     color: theme.palette.text.secondary,
+  },
+  right: {
+    textAlign: 'right'
+  },
+  menuButton: {
+    minWidth: 0,
+    padding: 4
   }
 });
 
 const PostSnippet = (props) => (
-  <Grid item xs>
+  <Grid item>
     <Paper className={props.classes.paper}>
-      <Link to={{
-        pathname: `/post/${props.id}`
-      }}>
-      <h2>{props.title}</h2></Link>
-      <p>{props.body}</p>
+      <Grid container>
+        <Grid item xs={8}>
+          <Link to={{
+            pathname: `/post/${props.id}`
+          }}>
+            <h3>{props.title}</h3>
+          </Link>
+        </Grid>
+        <Grid item xs={4} className={props.classes.right}>
+          <Link to={{
+            pathname: `/post/${props.id}/edit`
+          }}>
+            <Button
+              className={props.classes.menuButton}
+              color="inherit"
+              ><Create/>
+            </Button>
+          </Link>
+          <DeleteButton id={props.id} color="inherit"/>
+        </Grid>
+      </Grid>
+      <Grid container>
+        <Grid item xs={12}>
+          <h5>{moment(props.timestamp).format('MMM D, YYYY')} by {props.author}</h5>
+        </Grid>
+      </Grid>
+      <Grid container>
+        <Grid item xs={6}>
+          <Link to={{
+            pathname: `/post/${props.id}`,
+            hash: '#comments'
+          }}>
+            <h5>Comments: {props.commentCount}</h5>
+          </Link>
+        </Grid>
+        <Grid item xs={6} className={props.classes.right}>
+          <h5><VoteControls voteScore={props.voteScore} id={props.id}/></h5>
+        </Grid>
+      </Grid>
     </Paper>
   </Grid>
 )
 
 PostSnippet.propTypes = {
   title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  classes: PropTypes.object.isRequired
+  commentCount: PropTypes.number.isRequired,
+  timestamp: PropTypes.number.isRequired,
+  voteScore: PropTypes.number.isRequired,
+  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(PostSnippet)
