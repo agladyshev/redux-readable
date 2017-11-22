@@ -110,7 +110,10 @@ class Post extends React.Component {
 function mapStateToProps ({ posts, comments }, { match }) {
   const id = match.params.id
   const { body="", title="", author="", timestamp=0, voteScore=0 } = posts.has(id) ? posts.get(id) : {}
-  const postComments = comments.get(id) || []
+  const commentsArray = Array.from((comments.get(id) || []), array => array[1])
+    .filter(comment => !comment.deleted)
+  console.log(commentsArray)
+
   return {
     title: title,
     body: body,
@@ -118,7 +121,7 @@ function mapStateToProps ({ posts, comments }, { match }) {
     author: author,
     timestamp: timestamp,
     voteScore: voteScore,
-    comments: postComments.filter(comment => !comment.deleted)
+    comments: commentsArray
   }
 }
 
