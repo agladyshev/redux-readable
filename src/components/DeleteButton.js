@@ -6,7 +6,7 @@ import Button from 'material-ui/Button';
 import { Delete } from 'material-ui-icons'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { deletePost } from '../actions'
+import { deletePost, deleteComment } from '../actions'
 
 const styles = theme => ({
   menuButton: {
@@ -17,7 +17,9 @@ const styles = theme => ({
 
 class DeleteButton extends React.Component {
   static propTypes = {
-    id: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    parentId: PropTypes.string,
+    color: PropTypes.string,
     classes: PropTypes.object.isRequired,
   }
 
@@ -27,18 +29,18 @@ class DeleteButton extends React.Component {
   }
 
   handleDelete(event) {
-    const { id, history, dispatch } = this.props
-    dispatch(deletePost(id))
-    history.push('/')
+    const { parentId, id, history, dispatch } = this.props
+    console.log(parentId)
+    parentId ? dispatch(deleteComment(id)) : dispatch(deletePost(id))
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, color="contrast" } = this.props
     return (
       <Button
         onClick={this.handleDelete}
         className={classes.menuButton}
-        color="contrast"
+        color={color}
         ><Delete/>
       </Button>
     )

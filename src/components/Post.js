@@ -53,19 +53,25 @@ class Post extends React.Component {
   componentWillMount() {
     const { id, comments, title, dispatch } = this.props
     // if post comments are undefined, fetch them from server
-    !comments && dispatch(fetchComments(id))
+    !comments.length && dispatch(fetchComments(id))
     !title && dispatch(fetchPost(id))
   }
 
   render() {
     const { comments, classes, title, body, author, timestamp, voteScore, id} = this.props
     const commentsRendered = []
-    comments && comments.forEach((comment) => {
-      const {body, author, id} = comment
+    console.log(comments)
+    comments.forEach((comment) => {
+      const {body, author, id, deleted, timestamp, voteScore, parentId} = comment
       commentsRendered.push(
         <Comment
         body={body}
         author={author}
+        deleted={deleted}
+        timestamp={timestamp}
+        voteScore={voteScore}
+        id={id}
+        parentId={parentId}
         key={id} />
       )
     })
@@ -104,7 +110,7 @@ class Post extends React.Component {
 function mapStateToProps ({ posts, comments }, { match }) {
   const id = match.params.id
   const { body="", title="", author="", timestamp=0, voteScore=0 } = posts.has(id) ? posts.get(id) : {}
-  const postComments = comments.get(id)
+  const postComments = comments.get(id) || []
   return {
     title: title,
     body: body,
@@ -112,7 +118,7 @@ function mapStateToProps ({ posts, comments }, { match }) {
     author: author,
     timestamp: timestamp,
     voteScore: voteScore,
-    comments: postComments
+    comments: postComments.filter(comment => !comment.deleted)
   }
 }
 

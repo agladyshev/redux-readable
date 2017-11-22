@@ -50,7 +50,9 @@ function comments (state = new Map([]), action) {
       const { id:postId, comments:comments } = action
       return newState.set(postId, comments)
     case RECEIVE_COMMENT :
+      console.log(action)
       const { id, timestamp, body, author, voteScore, deleted, parentId, parentDeleted } = action.comment
+      console.log(deleted)
       return newState.set(parentId, [...newState.get(parentId), 
         { id, parentId, timestamp, body, author, voteScore, deleted, parentDeleted }])
     default :

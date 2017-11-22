@@ -122,3 +122,12 @@ export function newComment (body, author, parent) {
     })
     .then((res) => res.json())
 }
+
+export function deleteComment (id) {
+  return fetch(
+    `http://localhost:3001/comments/${id}`,
+    { headers: { 'Authorization': 'whatever-you-want'},
+      method: 'DELETE'
+    })
+    .then((res) => res.json())
+}

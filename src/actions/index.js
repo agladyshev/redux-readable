@@ -120,11 +120,8 @@ export const newComment = (parent, author, body) => dispatch => (
     .then(comment => dispatch(receiveComment(comment)))
 )
 
-// export function addCategory ({ name, path }) {
-//   return {
-//     type: ADD_CATEGORY,
-//     name,
-//     path,
-//   }
-// }
-
+export const deleteComment = id => dispatch => (
+  ServerAPIUtil
+    .deleteComment(id)
+    .then(comment => dispatch(receiveComment(comment)))
+)
