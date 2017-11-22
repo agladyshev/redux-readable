@@ -9,6 +9,7 @@ import Create from 'material-ui-icons/Create'
 
 import DeleteButton from './DeleteButton'
 import VoteControls from './VoteControls'
+import CommentForm from './CommentForm'
 
 import moment from 'moment'
 
@@ -27,46 +28,76 @@ const styles = theme => ({
   },
 });
 
-const Comment = (props) => (
-  <Paper className={props.classes.paper}>
-    <Grid container>
-      <Grid item xs={8}>
-        <h6>
-          {props.author},&nbsp;
-          {moment(props.timestamp).format('MMM D, YYYY')}
-        </h6>
-      </Grid>
-      <Grid item xs={4} className={props.classes.right}>
-        <Button
-          onClick={() => {console.log("here")}}
-          className={props.classes.menuButton}
-          color="inherit"
-          ><Create/>
-        </Button>
-        <DeleteButton id={props.id} color="inherit" parentId={props.parentId}/>
-      </Grid>
-    </Grid>
-    <p>{props.body}</p>
-    <Grid container>
-      <Grid item xs={12} className={props.classes.right}>
-        <VoteControls 
-          parentId={props.parentId}
-          id={props.id}
-          voteScore={props.voteScore}/>
-      </Grid>
-    </Grid>
-  </Paper>
-)
+class Comment extends React.Component{
+  static propTypes = {
+    author: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    deleted: PropTypes.bool.isRequired,
+    timestamp: PropTypes.number.isRequired,
+    voteScore: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
+    parentId: PropTypes.string.isRequired,
+    classes: PropTypes.object.isRequired,
+  }
 
-Comment.propTypes = {
-  author: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
-  deleted: PropTypes.bool.isRequired,
-  timestamp: PropTypes.number.isRequired,
-  voteScore: PropTypes.number.isRequired,
-  id: PropTypes.string.isRequired,
-  parentId: PropTypes.string.isRequired,
-  classes: PropTypes.object.isRequired,
+  constructor(props) {
+    super(props)
+    this.state = {
+      edit: false
+    }
+    this.toggleEdit = this.toggleEdit.bind(this)
+  }
+
+  toggleEdit(event) {
+    this.setState((prevState) => {
+      return {edit: !prevState.edit}
+    })
+  }
+
+  componentWillReceiveProps() {
+    this.setState({
+      edit: false
+    })
+  }
+
+  render() {
+    const { classes, author, body, timestamp, id, parentId, voteScore } = this.props
+    const { edit } = this.state
+    return (
+      <Paper className={classes.paper}>
+        <Grid container>
+          <Grid item xs={12} className={classes.right}>
+            <Button
+              onClick={this.toggleEdit}
+              className={classes.menuButton}
+              color="inherit"
+              ><Create/>
+            </Button>
+            <DeleteButton id={id} color="inherit" parentId={parentId}/>
+          </Grid>
+        </Grid>
+        {!edit ?
+        <Grid container>
+          <Grid item xs={12}>
+            {author},&nbsp;
+            {moment(timestamp).format('MMM D, YYYY')}
+          </Grid>
+          <Grid item xs={12}>
+            {body}
+          </Grid>
+          <Grid item xs={12} className={classes.right}>
+            <VoteControls 
+              parentId={parentId}
+              id={id}
+              voteScore={voteScore}/>
+          </Grid>
+        </Grid>
+        :
+        <CommentForm id={id} author={author} body={body}/>
+        }
+      </Paper>
+    )
+  }
 }
 
 export default withStyles(styles)(Comment)

@@ -13,7 +13,7 @@ import { fetchPost, fetchComments } from '../actions'
 
 import Comment from './Comment'
 import VoteControls from './VoteControls'
-import NewComment from './NewComment'
+import CommentForm from './CommentForm'
 
 import moment from 'moment'
 
@@ -96,7 +96,7 @@ class Post extends React.Component {
           </Grid>
         </Paper>
         <Grid item xs>
-          <NewComment parent={id}/>
+          <CommentForm parent={id}/>
         </Grid>
         <Grid item xs>
           {commentsRendered}

@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { withStyles } from 'material-ui/styles'
 
-import { newComment } from '../actions'
+import { newComment, editComment } from '../actions'
 
 const styles = theme => ({
   paper: {
@@ -30,9 +30,12 @@ const styles = theme => ({
   }
 });
 
-class NewComment extends React.Component {
+class CommentForm extends React.Component {
   static propTypes = {
-    parent: PropTypes.string.isRequired,
+    parent: PropTypes.string,
+    id: PropTypes.string,
+    body: PropTypes.string,
+    author: PropTypes.string,
     classes: PropTypes.object.isRequired
   }
 
@@ -56,8 +59,9 @@ class NewComment extends React.Component {
     // // alert('A name was submitted: ' + this.state.value);
     event.preventDefault()
     const { body, author} = this.state
-    const { dispatch, parent } = this.props
-    dispatch(newComment(body, author, parent))
+    const { dispatch, parent, id } = this.props
+    id ? dispatch(editComment({ id, body, author })) :
+      dispatch(newComment(body, author, parent))
     this.setState({body: "", author: ""})
   }
 
@@ -113,4 +117,4 @@ class NewComment extends React.Component {
 export default compose(
   withStyles(styles),
   connect(),
-)(NewComment)
+)(CommentForm)
