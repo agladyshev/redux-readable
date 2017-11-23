@@ -13,6 +13,12 @@ const styles = theme => ({
     minWidth: 0,
     padding: 4
   },
+  iconText: {
+    display: 'inline-flex',
+    'vertical-align': 'middle',
+    'align-items': 'center',
+    'justify-content': 'center',
+  }
 });
 
 class VoteControls extends React.Component {
@@ -43,7 +49,7 @@ class VoteControls extends React.Component {
   render() {
     const { classes, voteScore } = this.props
     return (
-      <div>
+      <div className={classes.iconText}>
         <Button
           onClick={() => {this.handleVote("downVote")}}
           className={classes.menuButton}

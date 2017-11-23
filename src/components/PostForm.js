@@ -131,7 +131,7 @@ class Post extends React.Component {
                 required={true}
               />
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={12}>
               <TextField
                 id="body"
                 label="Post"
@@ -155,7 +155,7 @@ class Post extends React.Component {
                 required={true}
               />
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={7}>
               <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="category">Category</InputLabel>
                 <Select
@@ -168,7 +168,7 @@ class Post extends React.Component {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={5}>
               <div className={classes.right}>
                 <Button type="submit" className={classes.button} raised color="primary">
                   <Done className={classes.leftIcon} />
