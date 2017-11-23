@@ -1,25 +1,27 @@
-import React from 'react';
+import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
 import { withRouter } from 'react-router-dom'
-import Button from 'material-ui/Button'
-import { KeyboardArrowLeft, KeyboardArrowRight } from 'material-ui-icons'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
+// material-ui components
+import { withStyles } from 'material-ui/styles'
+import Button from 'material-ui/Button'
+import { KeyboardArrowLeft, KeyboardArrowRight } from 'material-ui-icons'
+// own components
 import { votePost, voteComment } from '../actions'
 
-const styles = theme => ({
+const styles = () => ({
   menuButton: {
     minWidth: 0,
     padding: 4
   },
   iconText: {
-    display: 'inline-flex',
+    'display': 'inline-flex',
     'vertical-align': 'middle',
     'align-items': 'center',
-    'justify-content': 'center',
+    'justify-content': 'center'
   }
-});
+})
 
 class VoteControls extends React.Component {
   static propTypes = {
@@ -27,7 +29,7 @@ class VoteControls extends React.Component {
     parentId: PropTypes.string,
     voteScore: PropTypes.number,
     classes: PropTypes.object.isRequired,
-    currentVote: PropTypes.string,
+    currentVote: PropTypes.string
   }
 
   constructor(props) {
@@ -41,6 +43,7 @@ class VoteControls extends React.Component {
       parentId ? dispatch(voteComment(id, vote)) : dispatch(votePost(id, vote))
     } else if (currentVote !== vote) {
       // if person changes his vote, we have to call API twice
+      // since server doesn't store user information
       parentId ? dispatch(voteComment(id, vote)) : dispatch(votePost(id, vote))
       parentId ? dispatch(voteComment(id, vote)) : dispatch(votePost(id, vote))
     }
@@ -51,26 +54,28 @@ class VoteControls extends React.Component {
     return (
       <div className={classes.iconText}>
         <Button
-          onClick={() => {this.handleVote("downVote")}}
+          onClick={() => {
+            this.handleVote('downVote')
+          }}
           className={classes.menuButton}
-          value="downVote"
-          >
-        <KeyboardArrowLeft/>
+          value='downVote'>
+          <KeyboardArrowLeft/>
         </Button>
         {voteScore}
         <Button
-          onClick={() => {this.handleVote("upVote")}}
+          onClick={() => {
+            this.handleVote('upVote')
+          }}
           className={classes.menuButton}
-          value="upVote"
-          >
-        <KeyboardArrowRight/>
+          value='upVote'>
+          <KeyboardArrowRight/>
         </Button>
-      </div> 
+      </div>
     )
   }
 }
 
-function mapStateToProps ({ votes }, { id }) {
+function mapStateToProps({ votes }, { id }) {
   return {
     currentVote: votes.get(id)
   }

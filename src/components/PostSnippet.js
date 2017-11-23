@@ -1,23 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-
-import Paper from 'material-ui/Paper';
-import Grid from 'material-ui/Grid';
-import Button from 'material-ui/Button'
-import DeleteButton from './DeleteButton'
-import Create from 'material-ui-icons/Create'
-
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-
 import moment from 'moment'
-
+// material-ui components
+import { withStyles } from 'material-ui/styles'
+import { Paper, Grid, Button } from 'material-ui'
+import Create from 'material-ui-icons/Create'
+// own components
+import DeleteButton from './DeleteButton'
 import VoteControls from './VoteControls'
 
 const styles = theme => ({
   paper: {
     padding: 16,
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary
   },
   right: {
     textAlign: 'right'
@@ -26,7 +22,7 @@ const styles = theme => ({
     minWidth: 0,
     padding: 4
   }
-});
+})
 
 const PostSnippet = (props) => (
   <Grid item>
@@ -45,11 +41,11 @@ const PostSnippet = (props) => (
           }}>
             <Button
               className={props.classes.menuButton}
-              color="inherit"
-              ><Create/>
+              color='inherit'>
+              <Create/>
             </Button>
           </Link>
-          <DeleteButton id={props.id} color="inherit"/>
+          <DeleteButton id={props.id} color='inherit'/>
         </Grid>
       </Grid>
       <Grid container>
@@ -81,7 +77,7 @@ PostSnippet.propTypes = {
   commentCount: PropTypes.number.isRequired,
   timestamp: PropTypes.number.isRequired,
   voteScore: PropTypes.number.isRequired,
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(PostSnippet)

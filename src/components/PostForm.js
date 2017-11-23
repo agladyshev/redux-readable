@@ -1,47 +1,41 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
-import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
-import Grid from 'material-ui/Grid';
-import Button from 'material-ui/Button'
-import TextField from 'material-ui/TextField'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+// material-ui components
+import { withStyles } from 'material-ui/styles'
+import { Paper, Grid, Button, TextField, Select } from 'material-ui'
 import Input, { InputLabel } from 'material-ui/Input'
 import { MenuItem } from 'material-ui/Menu'
 import { FormControl } from 'material-ui/Form'
-import Select from 'material-ui/Select'
 import Done from 'material-ui-icons/Done'
-
-import { compose } from 'redux' 
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+// own components
 import { fetchPost, newPost, editPost } from '../actions'
 import { capitalize } from '../utils/helpers'
 
 const styles = theme => ({
   paper: {
     padding: 16,
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary
   },
   root: {
-    flex: '1 1 auto',
-    // margin: '1rem',
-    'overflow-x': 'hidden',
+    'flex': '1 1 auto',
+    'overflow-x': 'hidden'
   },
   right: {
     textAlign: 'right'
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   },
   leftIcon: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing.unit
   },
   formControl: {
-    // margin: theme.spacing.unit,
-    minWidth: 120,
+    minWidth: 120
   }
-});
+})
 
 class Post extends React.Component {
   static propTypes = {
@@ -60,7 +54,7 @@ class Post extends React.Component {
       title: props.title,
       body: props.body,
       author: props.author,
-      category: props.category,
+      category: props.category
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -68,20 +62,16 @@ class Post extends React.Component {
 
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.value,
-    });
+      [name]: event.target.value
+    })
   }
 
   handleSubmit(event) {
-    // alert('A name was submitted: ' + this.state.value);
     event.preventDefault()
-    const { title, body, author, category} = this.state
+    const { title, body, author, category } = this.state
     const { history, dispatch, id } = this.props
-    if (this.props.id) {
-      dispatch(editPost({ title, body, author, category, id }))
-    } else {
-      dispatch(newPost({ title, body, author, category }))
-    }
+    id ? dispatch(editPost({ title, body, author, category, id }))
+      : dispatch(newPost({ title, body, author, category }))
     history.push('/')
   }
 
@@ -96,7 +86,7 @@ class Post extends React.Component {
       title: newProps.title,
       body: newProps.body,
       author: newProps.author,
-      category: newProps.category,
+      category: newProps.category
     })
   }
 
@@ -108,69 +98,69 @@ class Post extends React.Component {
       const { name } = category
       const label = capitalize(name)
       categoriesMenu.push(
-        <MenuItem 
+        <MenuItem
           value={name}
           key={name}>
           {label}
         </MenuItem>
       )
-    }    
-    return(
+    }
+    return (
       <form className={classes.root} onSubmit={this.handleSubmit}>
         <Paper className={classes.paper}>
           <Grid container>
             <Grid item xs={12}>
               <TextField
-                id="title"
-                label="Title"
+                id='title'
+                label='Title'
                 className={classes.textField}
                 fullWidth
                 value={title}
                 onChange={this.handleChange('title')}
-                margin="normal"
+                margin='normal'
                 required={true}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                id="body"
-                label="Post"
+                id='body'
+                label='Post'
                 multiline
                 fullWidth
                 value={body}
                 onChange={this.handleChange('body')}
                 className={classes.textField}
-                margin="normal"
+                margin='normal'
                 required={true}
               />
             </Grid>
             <Grid item xs={8}>
               <TextField
-                id="author"
-                label="Author"
+                id='author'
+                label='Author'
                 className={classes.textField}
                 value={author}
                 onChange={this.handleChange('author')}
-                margin="normal"
+                margin='normal'
                 required={true}
               />
             </Grid>
             <Grid item xs={7}>
               <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="category">Category</InputLabel>
+                <InputLabel htmlFor='category'>Category</InputLabel>
                 <Select
                   value={category}
                   onChange={this.handleChange('category')}
-                  input={<Input id="category" />}
+                  input={<Input id='category' />}
                   required={true}
                 >
-                {categoriesMenu}
+                  {categoriesMenu}
                 </Select>
               </FormControl>
             </Grid>
             <Grid item xs={5}>
               <div className={classes.right}>
-                <Button type="submit" className={classes.button} raised color="primary">
+                <Button type='submit' className={classes.button} raised color='primary'>
                   <Done className={classes.leftIcon} />
                   Done
                 </Button>
@@ -183,16 +173,22 @@ class Post extends React.Component {
   }
 }
 
-function mapStateToProps ({ posts, categories }, { match }) {
+function mapStateToProps({ posts, categories }, { match }) {
   const pathId = match.params.id
-  const { body="", title="", author="", category="", id=pathId } = posts.has(pathId) ? posts.get(pathId) : {}
+  const { body = '',
+    title = '',
+    author = '',
+    category = '',
+    id = pathId } = posts.has(pathId) ? posts.get(pathId) : {}
+  // Better put here some fallback if no id found
+  // Probably redirect and warning message
   return {
     title: title,
     body: body,
     author: author,
     category: category,
     categories: categories,
-    id: id,
+    id: id
   }
 }
 

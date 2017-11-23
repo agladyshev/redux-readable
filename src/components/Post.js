@@ -1,45 +1,41 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-
-import Paper from 'material-ui/Paper';
-import Grid from 'material-ui/Grid';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import moment from 'moment'
+// material-ui components
+import { withStyles } from 'material-ui/styles'
+import Paper from 'material-ui/Paper'
+import Grid from 'material-ui/Grid'
 import CommentIcon from 'material-ui-icons/Comment'
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
-
-import { compose } from 'redux' 
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-
+// own components
 import { fetchPost, fetchComments } from '../actions'
-
 import Comment from './Comment'
 import VoteControls from './VoteControls'
 import CommentForm from './CommentForm'
 
-import moment from 'moment'
-
 const styles = theme => ({
   paper: {
     padding: 16,
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary
   },
   root: {
-    flex: '1 1 auto',
-    // margin: '1rem',
-    'overflow-x': 'hidden',
+    'flex': '1 1 auto',
+    'overflow-x': 'hidden'
   },
   right: {
     textAlign: 'right'
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   },
   rightIcon: {
-    marginLeft: theme.spacing.unit,
-  },
-});
+    marginLeft: theme.spacing.unit
+  }
+})
 
 class Post extends React.Component {
   static propTypes = {
@@ -61,9 +57,11 @@ class Post extends React.Component {
     this.toggleEdit = this.toggleEdit.bind(this)
   }
 
-  toggleEdit(event) {
+  toggleEdit() {
     this.setState((prevState) => {
-      return {edit: !prevState.edit}
+      return {
+        edit: !prevState.edit
+      }
     })
   }
 
@@ -81,24 +79,24 @@ class Post extends React.Component {
   }
 
   render() {
-    const { comments, classes, title, body, author, timestamp, voteScore, id} = this.props
+    const { comments, classes, title, body, author, timestamp, voteScore, id } = this.props
     const { edit } = this.state
     const commentsRendered = []
     comments.forEach((comment) => {
-      const {body, author, id, deleted, timestamp, voteScore, parentId} = comment
+      const { body, author, id, deleted, timestamp, voteScore, parentId } = comment
       commentsRendered.push(
         <Comment
-        body={body}
-        author={author}
-        deleted={deleted}
-        timestamp={timestamp}
-        voteScore={voteScore}
-        id={id}
-        parentId={parentId}
-        key={id} />
+          body={body}
+          author={author}
+          deleted={deleted}
+          timestamp={timestamp}
+          voteScore={voteScore}
+          id={id}
+          parentId={parentId}
+          key={id} />
       )
     })
-    return(
+    return (
       <div className={classes.root}>
         <Paper className={classes.paper}>
           <Grid container>
@@ -123,9 +121,9 @@ class Post extends React.Component {
               <h5>Comments: {comments.length}</h5>
             </Grid>
             <Grid item xs={8} className={classes.right}>
-              <Button 
+              <Button
                 className={classes.button}
-                raised color="accent"
+                raised color='accent'
                 onClick={this.toggleEdit}>
                 Reply
                 <CommentIcon className={classes.rightIcon}/>
@@ -133,14 +131,14 @@ class Post extends React.Component {
             </Grid>
           </Grid>
         </Paper>
-        {edit && 
+        {edit &&
         <Grid item xs>
           <Paper className={classes.paper}>
             <CommentForm parent={id}/>
           </Paper>
         </Grid>
         }
-        <Grid item xs id="comments">
+        <Grid item xs id='comments'>
           {commentsRendered}
         </Grid>
       </div>
@@ -148,12 +146,16 @@ class Post extends React.Component {
   }
 }
 
-function mapStateToProps ({ posts, comments }, { match }) {
+function mapStateToProps({ posts, comments }, { match }) {
   const id = match.params.id
-  const { body="", title="", author="", timestamp=0, voteScore=0 } = posts.has(id) ? posts.get(id) : {}
+  const { body = '',
+    title = '',
+    author = '',
+    timestamp = 0,
+    voteScore = 0 } = posts.has(id) ? posts.get(id) : {}
+  // convert map object to simple array and filter deleted posts
   const commentsArray = Array.from((comments.get(id) || []), array => array[1])
     .filter(comment => !comment.deleted)
-
   return {
     title: title,
     body: body,

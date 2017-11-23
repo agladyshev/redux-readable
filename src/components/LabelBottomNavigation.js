@@ -1,98 +1,91 @@
-/* eslint-disable flowtype/require-valid-file-annotation */
-
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
-import HomeIcon from 'material-ui-icons/Home'
-
-import { Link } from 'react-router-dom'
-
-import { capitalize } from '../utils/helpers'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Link, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
-import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux';
-
+import { connect } from 'react-redux'
+// material-ui components
+import { withStyles } from 'material-ui/styles'
+import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation'
+import HomeIcon from 'material-ui-icons/Home'
+// own components
+import { capitalize } from '../utils/helpers'
 import { fetchCategories } from '../actions'
-
-// import ReactIcon from '../icons/ReactIcon'
+// import svg icons turned into react components
+// if the number of categories expands
+// all we have to do is to put a new icon into icons directory
 import * as Icons from '../icons'
 
 const styles = {
   root: {
-    flex: '0 0 auto',
-    // height: '48px',
+    flex: '0 0 auto'
   },
   button: {
-    padding: 0,
+    padding: 0
   }
 }
 
-// const icons = new Map
-
 class LabelBottomNavigation extends React.Component {
   state = {
-    value: this.props.match.url.length > 1 
-    ? this.props.match.params.category : this.props.match.url,
-  };
+    // set navigation position value
+    value: this.props.match.url.length > 1
+      ? this.props.match.params.category : this.props.match.url
+  }
 
   handleChange = (event, value) => {
-    this.setState({ value });
-  };
+    this.setState({ value })
+  }
 
   componentWillMount() {
     !this.props.categories.length && this.props.dispatch(fetchCategories())
   }
 
   render() {
-    // for (const icon of Icons) {
-    //   console.log('here')
-    // }
     const { classes, categories } = this.props
     const { value } = this.state
-    const navBar =  []
+    const navBar = []
     for (const category of categories) {
-      const {name, path} = category
+      const { name, path } = category
       const label = capitalize(name)
+      // a bit of magic to try and find icon for category
       const Icon = Icons[`${label}Icon`]
       navBar.push(
         <BottomNavigationButton
-        component={Link}
-        to={{pathname:`/${path}`}}
-        label={label}
-        value={name}
-        className={classes.button}
-        icon={React.createElement(Icon, null)}
-        key={name} />
+          component={Link}
+          to={{ pathname: `/${path}` }}
+          label={label}
+          value={name}
+          className={classes.button}
+          // since component name is dynamic, can't use jsx
+          icon={React.createElement(Icon, null)}
+          key={name} />
       )
     }
     return (
       <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
-        <BottomNavigationButton 
+        <BottomNavigationButton
           component={Link}
-          to="/"
-          label="All"
-          value="/"
+          to='/'
+          label='All'
+          value='/'
           className={classes.button}
-          icon={<HomeIcon />}>
-        </BottomNavigationButton>  
+          icon={<HomeIcon />}/>
         {navBar}
       </BottomNavigation>
-    );
+    )
   }
 }
 
-function mapStateToProps ({ categories }) {
+function mapStateToProps({ categories }) {
   return {
-    categories: categories,
+    categories: categories
   }
 }
 
 LabelBottomNavigation.propTypes = {
   classes: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  // categories: PropTypes.Array.isRequired
-};
+  categories: PropTypes.array.isRequired
+}
 
 // export default withStyles(styles)(LabelBottomNavigation);
 

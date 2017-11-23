@@ -1,23 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Grid from 'material-ui/Grid';
-import { withRouter } from 'react-router-dom'
-
-import PostSnippet from './PostSnippet'
-
+import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-
+import { withRouter } from 'react-router-dom'
+// material-ui components
+import { withStyles } from 'material-ui/styles'
+import Grid from 'material-ui/Grid'
+// own components
+import PostSnippet from './PostSnippet'
 import { fetchPosts, fetchPostsByCategory } from '../actions'
 
-const styles = theme => ({
+const styles = () => ({
   root: {
-    flex: '1 1 auto',
-    padding: '0.5rem',
-    'overflow-x': 'hidden',
+    'flex': '1 1 auto',
+    'padding': '0.5rem',
+    'overflow-x': 'hidden'
   }
-});
+})
 
 class PostsGrid extends React.Component {
   static propTypes = {
@@ -57,9 +56,9 @@ class PostsGrid extends React.Component {
         // if there are many cats but few missing
         // we can loop through missing set and load one by one
         missingCategories.size === 1 ?
-        dispatch(fetchPostsByCategory(category)) : dispatch(fetchPosts())
+          dispatch(fetchPostsByCategory(category)) : dispatch(fetchPosts())
         this.setState({
-           categoriesLoaded: allCategories
+          categoriesLoaded: allCategories
         })
       }
     } else {
@@ -67,27 +66,27 @@ class PostsGrid extends React.Component {
       if (!categoriesLoaded.has(category)) {
         dispatch(fetchPostsByCategory(category))
         this.setState((prevState) => ({
-           categoriesLoaded: new Set(prevState.categoriesLoaded.add(category))
+          categoriesLoaded: new Set(prevState.categoriesLoaded.add(category))
         }))
-      } 
+      }
     }
   }
 
   render() {
-    const { classes, posts} = this.props
+    const { classes, posts } = this.props
     const postsRendered = []
     for (const post of posts) {
-      const {author, body, commentCount, timestamp, title, voteScore, id} = post
+      const { author, body, commentCount, timestamp, title, voteScore, id } = post
       postsRendered.push(
         <PostSnippet
-        author={author}
-        body={body}
-        commentCount={commentCount}
-        timestamp={timestamp}
-        title={title}
-        voteScore={voteScore}
-        id={id}
-        key={id} />
+          author={author}
+          body={body}
+          commentCount={commentCount}
+          timestamp={timestamp}
+          title={title}
+          voteScore={voteScore}
+          id={id}
+          key={id} />
       )
     }
 
@@ -102,11 +101,11 @@ class PostsGrid extends React.Component {
           {postsRendered}
         </Grid>
       </div>
-    );
+    )
   }
 }
 
-function mapStateToProps ({ posts, categories, sort }, { match }) {
+function mapStateToProps({ posts, categories, sort }, { match }) {
   const category = match.params.category
   // convert store map to single array
   // filter deleted posts before storage gets updated
@@ -117,7 +116,7 @@ function mapStateToProps ({ posts, categories, sort }, { match }) {
     categories: categories
   } : {
     posts: postsArray.filter(post => post.category === category),
-    categories:categories
+    categories: categories
   }
 }
 

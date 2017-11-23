@@ -10,12 +10,12 @@ export const CHANGE_SORT_METHOD = 'CHANGE_SORT_METHOD'
 
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
-  categories 
+  categories
 })
 
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
-  posts 
+  posts
 })
 
 export const receiveComments = (id, comments) => ({
@@ -24,7 +24,8 @@ export const receiveComments = (id, comments) => ({
   id
 })
 
-export function receivePost ({ id, timestamp, title, body, author, category, voteScore, deleted, commentCount }) {
+export function receivePost(
+  { id, timestamp, title, body, author, category, voteScore, deleted, commentCount }) {
   return {
     type: RECEIVE_POST,
     id,
@@ -67,7 +68,6 @@ export const fetchPosts = () => dispatch => (
   ServerAPIUtil
     .fetchPosts()
     .then(posts => dispatch(receivePosts(posts)))
-    // .then(posts => console.log(posts))
 )
 
 export const fetchPostsByCategory = (category) => dispatch => (
@@ -97,28 +97,26 @@ export const fetchComment = (id) => dispatch => (
 export const newPost = (post) => dispatch => (
   ServerAPIUtil
     .newPost(post)
-    // .then(res => console.log(res))
-    .then(post => dispatch(receivePost({...post})))
+    .then(post => dispatch(receivePost({ ...post })))
 )
 
 export const editPost = (post) => dispatch => (
   ServerAPIUtil
     .editPost(post)
-    // .then(res => console.log(res))
-    .then(post => dispatch(receivePost({...post})))
+    .then(post => dispatch(receivePost({ ...post })))
 )
 
 export const deletePost = (id) => dispatch => (
   ServerAPIUtil
     .deletePost(id)
-    .then(post => dispatch(receivePost({...post})))
+    .then(post => dispatch(receivePost({ ...post })))
 )
 
 export const votePost = (id, option) => dispatch => (
   ServerAPIUtil
     .votePost(id, option)
     .then(post => {
-      dispatch(receivePost({...post}))
+      dispatch(receivePost({ ...post }))
       dispatch(receiveVote(id, option))
     })
 )
@@ -138,14 +136,14 @@ export const deleteComment = id => dispatch => (
 export const editComment = (comment) => dispatch => (
   ServerAPIUtil
     .editComment(comment)
-    .then(comment => dispatch(receiveComment({...comment})))
+    .then(comment => dispatch(receiveComment({ ...comment })))
 )
 
 export const voteComment = (id, option) => dispatch => (
   ServerAPIUtil
     .voteComment(id, option)
     .then(comment => {
-      dispatch(receiveComment({...comment}))
+      dispatch(receiveComment({ ...comment }))
       dispatch(receiveVote(id, option))
     })
 )
