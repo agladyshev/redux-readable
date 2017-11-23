@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { withRouter } from 'react-router-dom'
 import Button from 'material-ui/Button';
 import { Delete } from 'material-ui-icons'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { deletePost, deleteComment } from '../actions'
 
 const styles = theme => ({
@@ -29,8 +29,9 @@ class DeleteButton extends React.Component {
   }
 
   handleDelete(event) {
-    const { parentId, id, history, dispatch } = this.props
+    const { parentId, id, dispatch, history } = this.props
     parentId ? dispatch(deleteComment(id)) : dispatch(deletePost(id))
+    !parentId && history.push('/')
   }
 
   render() {
@@ -48,6 +49,6 @@ class DeleteButton extends React.Component {
 
 export default compose(
   withStyles(styles),
+  withRouter,
   connect(),
-  withRouter
 )(DeleteButton)
