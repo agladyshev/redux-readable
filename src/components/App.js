@@ -12,6 +12,11 @@ import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   root: {
+    margin: 'auto',
+    'max-width': '50rem',
+
+  },
+  flex: {
     height: '100vh',
     display: 'flex',
     'flex-flow': 'column'
@@ -22,38 +27,38 @@ class App extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
+      <div className={classes.root}>
         <Switch>
           <Route exact path='/' render={() => (
-            <div className={classes.root}>
+            <div className={classes.flex}>
               <ButtonAppBar buttons={new Set(["add", "sort"])}/>         
               <PostsGrid/>
               <LabelBottomNavigation/>
             </div>
           )}/>
           <Route exact path='/new' render={() => (
-            <div className={classes.root}>
+            <div className={classes.flex}>
               <ButtonAppBar buttons={new Set(["back"])}/>
               <PostForm/>
               <LabelBottomNavigation/>
             </div>
           )}/>
           <Route exact path='/:category' render={() => (
-            <div className={classes.root}>
+            <div className={classes.flex}>
               <ButtonAppBar buttons={new Set(["add", "sort"])}/>
               <PostsGrid/>
               <LabelBottomNavigation/>
             </div>
           )}/>
           <Route exact path='/post/:id' render={() => (
-            <div className={classes.root}>
+            <div className={classes.flex}>
               <ButtonAppBar buttons={new Set(["back", "delete", "edit"])}/>
               <Post/>
               <LabelBottomNavigation/>
             </div>
           )}/>
           <Route exact path='/post/:id/edit' render={() => (
-            <div className={classes.root}>
+            <div className={classes.flex}>
               <ButtonAppBar buttons={new Set(["back", "delete"])}/>
               <PostForm/>
               <LabelBottomNavigation/>
