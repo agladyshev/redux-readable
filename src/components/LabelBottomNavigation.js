@@ -20,7 +20,8 @@ import * as Icons from '../icons'
 
 const styles = {
   root: {
-    flex: '0 1 auto',
+    flex: '0 0 auto',
+    // height: '48px',
   },
   button: {
     padding: 0,
