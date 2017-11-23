@@ -5,14 +5,9 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
-// import Add from 'material-ui-icons/Add'
-// import ArrowBack from 'material-ui-icons/ArrowBack'
-// import Delete from 'material-ui-icons/Delete'
-import { Add, Delete, ArrowBack, Create} from 'material-ui-icons'
-
-import { Link, withRouter } from 'react-router-dom'
+import { Add, ArrowBack, Create} from 'material-ui-icons'
+import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
-
 import DeleteButton from './DeleteButton'
 import SortControls from './SortControls'
 

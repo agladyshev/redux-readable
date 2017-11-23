@@ -14,7 +14,7 @@ import { fetchPosts, fetchPostsByCategory } from '../actions'
 const styles = theme => ({
   root: {
     flex: '1 1 auto',
-    margin: '1rem',
+    padding: '1rem',
     'overflow-x': 'hidden',
   }
 });
@@ -91,7 +91,7 @@ class PostsGrid extends React.Component {
           spacing={24}
           direction='column'
           justify='flex-start'
-          alignItems='center'
+          alignItems='stretch'
         >
           {postsRendered}
         </Grid>

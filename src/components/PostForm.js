@@ -1,25 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
 
+import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button'
-import Done from 'material-ui-icons/Done'
 import TextField from 'material-ui/TextField'
 import Input, { InputLabel } from 'material-ui/Input'
 import { MenuItem } from 'material-ui/Menu'
 import { FormControl } from 'material-ui/Form'
 import Select from 'material-ui/Select'
+import Done from 'material-ui-icons/Done'
 
 import { compose } from 'redux' 
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-
-import { fetchPost, fetchComments, fetchCategories, newPost, editPost } from '../actions'
-
-import Comment from './Comment'
-
+import { fetchPost, newPost, editPost } from '../actions'
 import { capitalize } from '../utils/helpers'
 
 const styles = theme => ({
@@ -90,11 +86,9 @@ class Post extends React.Component {
   }
 
   componentWillMount() {
-    const { id, title, dispatch, categories } = this.props
+    const { id, title, dispatch } = this.props
     // if post exists but not loaded, fetch it from server
-    // console.log(id && !title)
     id && !title && dispatch(fetchPost(id))
-    // this might cause constant re-render if id is invalid
   }
 
   componentWillReceiveProps(newProps) {

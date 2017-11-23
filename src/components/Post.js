@@ -9,7 +9,7 @@ import Button from 'material-ui/Button'
 
 import { compose } from 'redux' 
 import { connect } from 'react-redux'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import { fetchPost, fetchComments } from '../actions'
 

@@ -1,15 +1,11 @@
 import React from 'react'
 import { Paper, Grid, Button} from 'material-ui'
+import { withStyles } from 'material-ui/styles'
 import TextField from 'material-ui/TextField'
-import Input, { InputLabel } from 'material-ui/Input'
 import Done from 'material-ui-icons/Done'
-// import { MenuItem } from 'material-ui/Menu'
-import { FormControl } from 'material-ui/Form'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { withStyles } from 'material-ui/styles'
-
 import { newComment, editComment } from '../actions'
 
 const styles = theme => ({
