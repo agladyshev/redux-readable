@@ -6,6 +6,7 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import CommentIcon from 'material-ui-icons/Comment'
 import Button from 'material-ui/Button'
+import Typography from 'material-ui/Typography'
 
 import { compose } from 'redux' 
 import { connect } from 'react-redux'
@@ -108,7 +109,7 @@ class Post extends React.Component {
               <h6>{moment(timestamp).format('MMM D, YYYY')}</h6>
             </Grid>
           </Grid>
-          <div>{body}</div>
+          <Typography>{body}</Typography>
           <Grid container>
             <Grid item xs={8}>
               <h5>by {author}</h5>

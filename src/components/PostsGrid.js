@@ -14,7 +14,7 @@ import { fetchPosts, fetchPostsByCategory } from '../actions'
 const styles = theme => ({
   root: {
     flex: '1 1 auto',
-    padding: '1rem',
+    padding: '0.5rem',
     'overflow-x': 'hidden',
   }
 });
@@ -33,6 +33,12 @@ class PostsGrid extends React.Component {
     this.state = {
       categoriesLoaded: new Set([])
     }
+  }
+
+  componentWillMount() {
+    const { dispatch } = this.props
+    const { category } = this.props.match.params
+    category ? dispatch(fetchPostsByCategory(category)) : dispatch(fetchPosts())
   }
 
   componentWillReceiveProps(newProps) {
@@ -88,7 +94,7 @@ class PostsGrid extends React.Component {
     return (
       <div className={classes.root}>
         <Grid container
-          spacing={24}
+          spacing={8}
           direction='column'
           justify='flex-start'
           alignItems='stretch'
