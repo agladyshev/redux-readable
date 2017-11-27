@@ -109,7 +109,10 @@ export const editPost = (post) => dispatch => (
 export const deletePost = (id) => dispatch => (
   ServerAPIUtil
     .deletePost(id)
-    .then(post => dispatch(receivePost({ ...post })))
+    .then(post => {
+      dispatch(receivePost({ ...post }))
+      dispatch(fetchComments(id))
+    })
 )
 
 export const votePost = (id, option) => dispatch => (

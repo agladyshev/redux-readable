@@ -8,6 +8,7 @@ import ButtonAppBar from './ButtonAppBar'
 import Post from './Post'
 import PostForm from './PostForm'
 import PostsGrid from './PostsGrid'
+import NotFound from './NotFound'
 import LabelBottomNavigation from './LabelBottomNavigation'
 
 const styles = () => ({
@@ -28,6 +29,13 @@ class App extends Component {
     return (
       <div className={classes.root}>
         <Switch>
+          <Route exact path='/page-not-found' render={() => (
+            <div className={classes.flex}>
+              <ButtonAppBar buttons={new Set(['back'])}/>
+              <NotFound/>
+              <LabelBottomNavigation/>
+            </div>
+          )}/>
           <Route exact path='/' render={() => (
             <div className={classes.flex}>
               <ButtonAppBar buttons={new Set(['add', 'sort'])}/>

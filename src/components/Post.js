@@ -146,16 +146,24 @@ class Post extends React.Component {
   }
 }
 
-function mapStateToProps({ posts, comments }, { match }) {
+function mapStateToProps({ posts, comments }, { match, history }) {
   const id = match.params.id
   const { body = '',
     title = '',
     author = '',
     timestamp = 0,
-    voteScore = 0 } = posts.has(id) ? posts.get(id) : {}
+    voteScore = 0,
+    deleted = true } = posts.has(id) && posts.get(id)
+    // : {
+    //   body: `Sorry, this post is either deleted or doesn't exist yet`,
+    //   title: `404 - not found`,
+    //   timestamp: null,
+    //   voteScore: null
+    // }
   // convert map object to simple array and filter deleted posts
+  deleted && history.push('/page-not-found')
   const commentsArray = Array.from((comments.get(id) || []), array => array[1])
-    .filter(comment => !comment.deleted)
+    .filter(comment => !comment.deleted && !comment.parentDeleted)
   return {
     title: title,
     body: body,
@@ -163,7 +171,8 @@ function mapStateToProps({ posts, comments }, { match }) {
     author: author,
     timestamp: timestamp,
     voteScore: voteScore,
-    comments: commentsArray
+    comments: commentsArray,
+    deleted: deleted
   }
 }
 
