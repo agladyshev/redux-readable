@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import 'typeface-roboto'
 
-import ButtonAppBar from './ButtonAppBar'
-import Post from './Post'
-import PostForm from './PostForm'
-import PostsGrid from './PostsGrid'
+import ButtonAppBar from '../controls/ButtonAppBar'
+import Post from '../post/Post'
+import PostForm from '../post/PostForm'
+import PostsGrid from '../post/PostsGrid'
 import NotFound from './NotFound'
-import LabelBottomNavigation from './LabelBottomNavigation'
+import LabelBottomNavigation from '../navigation/LabelBottomNavigation'
 
 const styles = () => ({
   root: {

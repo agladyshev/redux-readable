@@ -8,8 +8,8 @@ import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
 import Create from 'material-ui-icons/Create'
 // own components
-import DeleteButton from './DeleteButton'
-import VoteControls from './VoteControls'
+import DeleteButton from '../controls/DeleteButton'
+import VoteControls from '../controls/VoteControls'
 import CommentForm from './CommentForm'
 
 const styles = theme => ({

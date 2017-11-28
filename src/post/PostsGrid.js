@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom'
 import { withStyles } from 'material-ui/styles'
 import Grid from 'material-ui/Grid'
 // own components
-import PostSnippet from './PostSnippet'
+import PostSnippet from '../post/PostSnippet'
 import { fetchPosts, fetchPostsByCategory } from '../actions'
 
 const styles = () => ({

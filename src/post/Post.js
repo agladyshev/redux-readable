@@ -13,9 +13,9 @@ import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
 // own components
 import { fetchPost, fetchComments } from '../actions'
-import Comment from './Comment'
-import VoteControls from './VoteControls'
-import CommentForm from './CommentForm'
+import Comment from '../comment/Comment'
+import VoteControls from '../controls/VoteControls'
+import CommentForm from '../comment/CommentForm'
 
 const styles = theme => ({
   paper: {

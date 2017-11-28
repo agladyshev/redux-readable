@@ -7,8 +7,8 @@ import { withStyles } from 'material-ui/styles'
 import { Paper, Grid, Button } from 'material-ui'
 import Create from 'material-ui-icons/Create'
 // own components
-import DeleteButton from './DeleteButton'
-import VoteControls from './VoteControls'
+import DeleteButton from '../controls/DeleteButton'
+import VoteControls from '../controls/VoteControls'
 
 const styles = theme => ({
   paper: {
