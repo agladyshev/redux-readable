@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 // material-ui components
 import Button from 'material-ui/Button'
 import Menu, { MenuItem } from 'material-ui/Menu'
@@ -28,7 +29,7 @@ class SortControls extends React.Component {
 
   handleRequestClose = (e, method) => {
     this.setState({ open: false })
-    method && this.props.dispatch(changeSortMethod(method))
+    method && this.props.changeSortMethod(method)
   };
 
   render() {
@@ -67,4 +68,7 @@ const mapStateToProps = ({ sort }) => ({
   sort: sort
 })
 
-export default connect(mapStateToProps)(SortControls)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ changeSortMethod }, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(SortControls)

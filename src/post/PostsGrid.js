@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { compose } from 'redux'
+import { compose, bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 // material-ui components
 import { withStyles } from 'material-ui/styles'
@@ -24,7 +24,8 @@ class PostsGrid extends React.Component {
     categories: PropTypes.array.isRequired,
     posts: PropTypes.array.isRequired,
     match: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
+    fetchPostsByCategory: PropTypes.func.isRequired,
+    fetchPosts: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -35,13 +36,13 @@ class PostsGrid extends React.Component {
   }
 
   componentWillMount() {
-    const { dispatch } = this.props
+    const { fetchPostsByCategory, fetchPosts } = this.props
     const { category } = this.props.match.params
-    category ? dispatch(fetchPostsByCategory(category)) : dispatch(fetchPosts())
+    category ? fetchPostsByCategory(category) : fetchPosts()
   }
 
   componentWillReceiveProps(newProps) {
-    const { dispatch, categories } = newProps
+    const { fetchPostsByCategory, fetchPosts, categories } = newProps
     const { category } = newProps.match.params
     const { categoriesLoaded } = this.state
     if (!category) {
@@ -56,7 +57,7 @@ class PostsGrid extends React.Component {
         // if there are many cats but few missing
         // we can loop through missing set and load one by one
         missingCategories.size === 1 ?
-          dispatch(fetchPostsByCategory(category)) : dispatch(fetchPosts())
+          fetchPostsByCategory(category) : fetchPosts()
         this.setState({
           categoriesLoaded: allCategories
         })
@@ -64,7 +65,7 @@ class PostsGrid extends React.Component {
     } else {
       // if single category selected, check if store has it already
       if (!categoriesLoaded.has(category)) {
-        dispatch(fetchPostsByCategory(category))
+        fetchPostsByCategory(category)
         this.setState((prevState) => ({
           categoriesLoaded: new Set(prevState.categoriesLoaded.add(category))
         }))
@@ -105,11 +106,10 @@ class PostsGrid extends React.Component {
   }
 }
 
-function mapStateToProps({ posts, categories, sort }, { match }) {
+const mapStateToProps = ({ posts, categories, sort }, { match }) => {
   const category = match.params.category
   // convert store map to single array
   // filter deleted posts before storage gets updated
-  console.log(posts)
   const postsArray = Array.from(posts, array => array[1]).filter(post => !post.deleted)
   postsArray.sort((a, b) => b[sort] - a[sort])
   return !category ? {
@@ -121,8 +121,11 @@ function mapStateToProps({ posts, categories, sort }, { match }) {
   }
 }
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ fetchPostsByCategory, fetchPosts }, dispatch)
+
 export default compose(
   withStyles(styles),
   withRouter,
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(PostsGrid)

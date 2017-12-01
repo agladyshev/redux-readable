@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { compose } from 'redux'
+import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 // material-ui components
@@ -69,16 +69,16 @@ class Post extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     const { title, body, author, category } = this.state
-    const { history, dispatch, id } = this.props
-    id ? dispatch(editPost({ title, body, author, category, id }))
-      : dispatch(newPost({ title, body, author, category }))
+    const { history, editPost, newPost, id } = this.props
+    id ? editPost({ title, body, author, category, id })
+      : newPost({ title, body, author, category })
     history.push('/')
   }
 
   componentWillMount() {
-    const { id, title, dispatch } = this.props
+    const { id, title, fetchPost } = this.props
     // if post exists but not loaded, fetch it from server
-    id && !title && dispatch(fetchPost(id))
+    id && !title && fetchPost(id)
   }
 
   componentWillReceiveProps(newProps) {
@@ -173,15 +173,17 @@ class Post extends React.Component {
   }
 }
 
-function mapStateToProps({ posts, categories }, { match }) {
-  const pathId = match.params.id
+const mapStateToProps = ({ posts, categories }, { match, history }) => {
+  const id = match.params.id
   const { body = '',
     title = '',
     author = '',
     category = '',
-    id = pathId } = posts.has(pathId) ? posts.get(pathId) : {}
-  // Better put here some fallback if no id found
-  // Probably redirect and warning message
+    timestamp = 0,
+    voteScore = 0,
+    deleted = true } = posts.has(id) && posts.get(id)
+  // convert map object to simple array and filter deleted posts
+  deleted && history.push('/page-not-found')
   return {
     title: title,
     body: body,
@@ -192,8 +194,11 @@ function mapStateToProps({ posts, categories }, { match }) {
   }
 }
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ editPost, newPost, fetchPost }, dispatch)
+
 export default compose(
   withStyles(styles),
   withRouter,
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(Post)

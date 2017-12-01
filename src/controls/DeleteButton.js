@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { compose } from 'redux'
+import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 // material-ui components
@@ -31,9 +31,9 @@ class DeleteButton extends React.Component {
   }
 
   handleDelete() {
-    const { parentId, id, dispatch, history } = this.props
+    const { parentId, id, history, deleteComment, deletePost } = this.props
     // if parent id is provided, the object is comment, not a post
-    parentId ? dispatch(deleteComment(id)) : dispatch(deletePost(id))
+    parentId ? deleteComment(id) : deletePost(id)
     !parentId && history.push('/')
   }
 
@@ -50,8 +50,11 @@ class DeleteButton extends React.Component {
   }
 }
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ deleteComment, deletePost }, dispatch)
+
 export default compose(
   withStyles(styles),
   withRouter,
-  connect(),
+  connect(null, mapDispatchToProps),
 )(DeleteButton)

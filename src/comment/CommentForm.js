@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { compose } from 'redux'
+import { compose, bindActionCreators } from 'redux'
 // material-ui components
 import { Paper, Grid, Button } from 'material-ui'
 import { withStyles } from 'material-ui/styles'
@@ -52,10 +52,10 @@ class CommentForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     const { body, author } = this.state
-    const { dispatch, parent, id } = this.props
+    const { newComment, editComment, parent, id } = this.props
     // the form is the same for adding new comment or editing old
-    id ? dispatch(editComment({ id, body, author })) :
-      dispatch(newComment(body, author, parent))
+    id ? editComment({ id, body, author }) :
+      newComment(body, author, parent)
     this.setState({
       body: '', author: ''
     })
@@ -110,7 +110,10 @@ class CommentForm extends React.Component {
   }
 }
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ newComment, editComment }, dispatch)
+
 export default compose(
   withStyles(styles),
-  connect(),
+  connect(null, mapDispatchToProps),
 )(CommentForm)

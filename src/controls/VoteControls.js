@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
-import { compose } from 'redux'
+import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 // material-ui components
 import { withStyles } from 'material-ui/styles'
@@ -38,14 +38,14 @@ class VoteControls extends React.Component {
   }
 
   handleVote(vote) {
-    const { parentId, id, dispatch, currentVote } = this.props
+    const { parentId, id, currentVote, voteComment, votePost } = this.props
     if (!currentVote) {
-      parentId ? dispatch(voteComment(id, vote)) : dispatch(votePost(id, vote))
+      parentId ? voteComment(id, vote) : votePost(id, vote)
     } else if (currentVote !== vote) {
       // if person changes his vote, we have to call API twice
       // since server doesn't store user information
-      parentId ? dispatch(voteComment(id, vote)) : dispatch(votePost(id, vote))
-      parentId ? dispatch(voteComment(id, vote)) : dispatch(votePost(id, vote))
+      parentId ? voteComment(id, vote) : votePost(id, vote)
+      parentId ? voteComment(id, vote) : votePost(id, vote)
     }
   }
 
@@ -75,15 +75,18 @@ class VoteControls extends React.Component {
   }
 }
 
-function mapStateToProps({ votes }, { id }) {
+const mapStateToProps = ({ votes }, { id }) => {
   return {
     currentVote: votes.get(id)
   }
 }
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ voteComment, votePost }, dispatch)
+
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   withRouter
 )(VoteControls)
 

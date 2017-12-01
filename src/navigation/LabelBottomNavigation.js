@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
-import { compose } from 'redux'
+import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 // material-ui components
 import { withStyles } from 'material-ui/styles'
@@ -36,7 +36,7 @@ class LabelBottomNavigation extends React.Component {
   }
 
   componentWillMount() {
-    !this.props.categories.length && this.props.dispatch(fetchCategories())
+    !this.props.categories.length && this.props.fetchCategories()
   }
 
   render() {
@@ -75,11 +75,14 @@ class LabelBottomNavigation extends React.Component {
   }
 }
 
-function mapStateToProps({ categories }) {
+const mapStateToProps = ({ categories }) => {
   return {
     categories: categories
   }
 }
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ fetchCategories }, dispatch)
 
 LabelBottomNavigation.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -92,5 +95,5 @@ LabelBottomNavigation.propTypes = {
 export default compose(
   withStyles(styles),
   withRouter,
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(LabelBottomNavigation)

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { compose } from 'redux'
+import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import moment from 'moment'
@@ -67,10 +67,10 @@ class Post extends React.Component {
   }
 
   componentWillMount() {
-    const { id, comments, title, dispatch } = this.props
+    const { id, comments, title, fetchComments, fetchPost } = this.props
     // if post comments are undefined, fetch them from server
-    !comments.length && dispatch(fetchComments(id))
-    !title && dispatch(fetchPost(id))
+    !comments.length && fetchComments(id)
+    !title && fetchPost(id)
   }
 
   componentWillReceiveProps() {
@@ -147,7 +147,7 @@ class Post extends React.Component {
   }
 }
 
-function mapStateToProps({ posts, comments }, { match, history }) {
+const mapStateToProps = ({ posts, comments }, { match, history }) => {
   const id = match.params.id
   const { body = '',
     title = '',
@@ -177,8 +177,12 @@ function mapStateToProps({ posts, comments }, { match, history }) {
   }
 }
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ fetchComments, fetchPost }, dispatch)
+
+
 export default compose(
   withStyles(styles),
   withRouter,
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(Post)
