@@ -29,7 +29,7 @@ const styles = () => ({
 function ButtonAppBar(props) {
   // Panel renders buttons given the list route provide
   // Can move all buttons into own components and provide button components via props
-  const { classes, history, buttons, match } = props
+  const { classes, history, buttons = new Set([]), match } = props
   return (
     <div className={classes.root}>
       <AppBar position='static'>
@@ -75,7 +75,7 @@ function ButtonAppBar(props) {
 }
 
 ButtonAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 }
 
 export default compose(

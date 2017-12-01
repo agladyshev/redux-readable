@@ -151,12 +151,14 @@ class Post extends React.Component {
 
 const mapStateToProps = ({ posts, comments }, { match, history }) => {
   const id = match.params.id
+  !posts.has(id) && history.push('/page-not-found')
   const { body = '',
     title = '',
     author = '',
     timestamp = 0,
     voteScore = 0,
-    deleted = false } = posts.has(id) && posts.get(id)
+    deleted = false } = posts.get(id) || {}
+  deleted && history.push('/page-not-found')
   // convert map object to simple array and filter deleted posts
   const commentsArray = Array.from((comments.get(id) || []), array => array[1])
     .filter(comment => !comment.deleted && !comment.parentDeleted)

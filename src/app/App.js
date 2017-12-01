@@ -31,7 +31,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/page-not-found' render={() => (
             <div className={classes.flex}>
-              <ButtonAppBar buttons={new Set(['back'])}/>
+              <ButtonAppBar/>
               <NotFound/>
               <LabelBottomNavigation/>
             </div>

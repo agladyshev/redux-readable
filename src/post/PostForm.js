@@ -175,13 +175,12 @@ class Post extends React.Component {
 
 const mapStateToProps = ({ posts, categories }, { match, history }) => {
   const id = match.params.id
+  match.params.id && !posts.has(id) && history.push('/page-not-found')
   const { body = '',
     title = '',
     author = '',
     category = '',
-    timestamp = 0,
-    voteScore = 0,
-    deleted = false } = posts.has(id) && posts.get(id)
+    deleted = false } = posts.has(id) || {}
   // convert map object to simple array and filter deleted posts
   deleted && history.push('/page-not-found')
   return {
