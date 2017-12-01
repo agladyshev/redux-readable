@@ -1,7 +1,7 @@
 import {
   RECEIVE_POSTS,
   RECEIVE_POST
-} from '../actions'
+} from './PostActions'
 
 const postReducer = (state = new Map([]), action) => {
   switch (action.type) {

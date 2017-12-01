@@ -8,7 +8,7 @@ import { withStyles } from 'material-ui/styles'
 import Grid from 'material-ui/Grid'
 // own components
 import PostSnippet from '../post/PostSnippet'
-import { fetchPosts, fetchPostsByCategory } from '../actions'
+import { fetchPosts, fetchPostsByCategory } from './PostActions'
 
 const styles = () => ({
   root: {

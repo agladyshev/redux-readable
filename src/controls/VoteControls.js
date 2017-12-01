@@ -8,7 +8,7 @@ import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import { KeyboardArrowLeft, KeyboardArrowRight } from 'material-ui-icons'
 // own components
-import { votePost, voteComment } from '../actions'
+import { votePost, voteComment } from './ControlsActions'
 
 const styles = () => ({
   menuButton: {

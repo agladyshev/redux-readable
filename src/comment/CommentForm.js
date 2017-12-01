@@ -8,7 +8,7 @@ import { withStyles } from 'material-ui/styles'
 import TextField from 'material-ui/TextField'
 import Done from 'material-ui-icons/Done'
 // own components
-import { newComment, editComment } from '../actions'
+import { newComment, editComment } from './CommentActions'
 
 const styles = theme => ({
   root: {

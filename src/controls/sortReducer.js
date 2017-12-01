@@ -1,6 +1,6 @@
 import {
   CHANGE_SORT_METHOD
-} from '../actions'
+} from './ControlsActions'
 
 const sortReducer = (state = 'timestamp', action) => {
   switch (action.type) {

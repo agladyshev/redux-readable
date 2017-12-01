@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import Button from 'material-ui/Button'
 import Menu, { MenuItem } from 'material-ui/Menu'
 // own components
-import { changeSortMethod } from '../actions'
+import { changeSortMethod } from './ControlsActions'
 
 const sortMethods = new Map([
   [ 'timestamp', 'date' ],

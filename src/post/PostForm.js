@@ -11,7 +11,7 @@ import { MenuItem } from 'material-ui/Menu'
 import { FormControl } from 'material-ui/Form'
 import Done from 'material-ui-icons/Done'
 // own components
-import { fetchPost, newPost, editPost } from '../actions'
+import { fetchPost, newPost, editPost } from './PostActions'
 import { capitalize } from '../utils/helpers'
 
 const styles = theme => ({

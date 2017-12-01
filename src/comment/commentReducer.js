@@ -1,7 +1,7 @@
 import {
   RECEIVE_COMMENTS,
   RECEIVE_COMMENT
-} from '../actions'
+} from './CommentActions'
 
 const commentReducer = (state = new Map([]), action) => {
   // Comments stored as map within map, so it might get confusing a bit

@@ -8,7 +8,7 @@ import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import { Delete } from 'material-ui-icons'
 // own components
-import { deletePost, deleteComment } from '../actions'
+import { deletePost, deleteComment } from './ControlsActions'
 
 const styles = () => ({
   menuButton: {

@@ -1,6 +1,6 @@
 import {
   RECEIVE_VOTE
-} from '../actions'
+} from './ControlsActions'
 
 const voteReducer = (state = new Map([]), action) => {
   switch (action.type) {

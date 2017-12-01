@@ -1,6 +1,6 @@
 import {
   RECEIVE_CATEGORIES
-} from '../actions'
+} from './CategoryActions'
 
 const categoryReducer = (state = [], action) => {
   switch (action.type) {
