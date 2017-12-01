@@ -13,7 +13,7 @@ import { fetchCategories } from './CategoryActions'
 // import svg icons turned into react components
 // if the number of categories expands
 // all we have to do is to put a new icon into icons directory
-import * as Icons from '../icons'
+import * as Icons from './icons'
 
 const styles = {
   root: {
