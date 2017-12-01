@@ -154,15 +154,8 @@ const mapStateToProps = ({ posts, comments }, { match, history }) => {
     author = '',
     timestamp = 0,
     voteScore = 0,
-    deleted = true } = posts.has(id) && posts.get(id)
-    // : {
-    //   body: `Sorry, this post is either deleted or doesn't exist yet`,
-    //   title: `404 - not found`,
-    //   timestamp: null,
-    //   voteScore: null
-    // }
+    deleted = false } = posts.has(id) && posts.get(id)
   // convert map object to simple array and filter deleted posts
-  deleted && history.push('/page-not-found')
   const commentsArray = Array.from((comments.get(id) || []), array => array[1])
     .filter(comment => !comment.deleted && !comment.parentDeleted)
   return {
@@ -179,7 +172,6 @@ const mapStateToProps = ({ posts, comments }, { match, history }) => {
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ fetchComments, fetchPost }, dispatch)
-
 
 export default compose(
   withStyles(styles),
