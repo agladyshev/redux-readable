@@ -47,7 +47,9 @@ class Post extends React.Component {
     voteScore: PropTypes.number.isRequired,
     timestamp: PropTypes.number.isRequired,
     comments: PropTypes.array,
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    fetchComments: PropTypes.func.isRequired,
+    fetchPost: PropTypes.func.isRequired
   }
 
   constructor(props) {

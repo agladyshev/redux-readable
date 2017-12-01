@@ -29,7 +29,9 @@ class VoteControls extends React.Component {
     parentId: PropTypes.string,
     voteScore: PropTypes.number,
     classes: PropTypes.object.isRequired,
-    currentVote: PropTypes.string
+    currentVote: PropTypes.string,
+    voteComment: PropTypes.func.isRequired,
+    votePost: PropTypes.func.isRequired
   }
 
   constructor(props) {

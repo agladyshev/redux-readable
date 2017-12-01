@@ -15,7 +15,8 @@ const sortMethods = new Map([
 
 class SortControls extends React.Component {
   static propTypes = {
-    sort: PropTypes.string.isRequired
+    sort: PropTypes.string.isRequired,
+    changeSortMethod: PropTypes.func.isRequired
   }
 
   state = {

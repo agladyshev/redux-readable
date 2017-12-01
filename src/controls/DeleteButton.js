@@ -22,7 +22,9 @@ class DeleteButton extends React.Component {
     id: PropTypes.string.isRequired,
     parentId: PropTypes.string,
     color: PropTypes.string,
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    deleteComment: PropTypes.func.isRequired,
+    deletePost: PropTypes.func.isRequired
   }
 
   constructor(props) {

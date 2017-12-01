@@ -30,7 +30,9 @@ class CommentForm extends React.Component {
     id: PropTypes.string,
     body: PropTypes.string,
     author: PropTypes.string,
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    newComment: PropTypes.func.isRequired,
+    editComment: PropTypes.func.isRequired
   }
 
   constructor(props) {

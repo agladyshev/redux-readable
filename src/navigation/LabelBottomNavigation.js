@@ -87,10 +87,9 @@ const mapDispatchToProps = dispatch =>
 LabelBottomNavigation.propTypes = {
   classes: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  categories: PropTypes.array.isRequired
+  categories: PropTypes.array.isRequired,
+  fetchCategories: PropTypes.func.isRequired,
 }
-
-// export default withStyles(styles)(LabelBottomNavigation);
 
 export default compose(
   withStyles(styles),
