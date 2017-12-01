@@ -1,4 +1,5 @@
-import * as ServerAPIUtil from '../utils/api'
+import * as PostAPI from '../post/PostAPI'
+import * as CommentAPI from '../comment/CommentAPI'
 import { receivePost } from '../post/PostActions'
 import { receiveComment, fetchComments } from '../comment/CommentActions'
 
@@ -19,7 +20,7 @@ export const changeSortMethod = (sort) => ({
 // Middleware methods below
 
 export const deletePost = (id) => dispatch => (
-  ServerAPIUtil
+  PostAPI
     .deletePost(id)
     .then(post => {
       dispatch(receivePost({ ...post }))
@@ -28,7 +29,7 @@ export const deletePost = (id) => dispatch => (
 )
 
 export const votePost = (id, option) => dispatch => (
-  ServerAPIUtil
+  PostAPI
     .votePost(id, option)
     .then(post => {
       dispatch(receivePost({ ...post }))
@@ -37,13 +38,13 @@ export const votePost = (id, option) => dispatch => (
 )
 
 export const deleteComment = id => dispatch => (
-  ServerAPIUtil
+  CommentAPI
     .deleteComment(id)
     .then(comment => dispatch(receiveComment(comment)))
 )
 
 export const voteComment = (id, option) => dispatch => (
-  ServerAPIUtil
+  CommentAPI
     .voteComment(id, option)
     .then(comment => {
       dispatch(receiveComment({ ...comment }))

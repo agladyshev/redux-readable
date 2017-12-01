@@ -1,4 +1,4 @@
-import * as ServerAPIUtil from '../utils/api'
+import * as CommentAPI from './CommentAPI'
 
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
@@ -17,25 +17,25 @@ export const receiveComment = (comment) => ({
 // Middleware methods below
 
 export const fetchComments = (id) => dispatch => (
-  ServerAPIUtil
+  CommentAPI
     .fetchComments(id)
     .then(comments => dispatch(receiveComments(id, comments)))
 )
 
 export const fetchComment = (id) => dispatch => (
-  ServerAPIUtil
+  CommentAPI
     .fetchComment(id)
     .then(comment => dispatch(receiveComment(comment)))
 )
 
 export const newComment = (parent, author, body) => dispatch => (
-  ServerAPIUtil
+  CommentAPI
     .newComment(parent, author, body)
     .then(comment => dispatch(receiveComment(comment)))
 )
 
 export const editComment = (comment) => dispatch => (
-  ServerAPIUtil
+  CommentAPI
     .editComment(comment)
     .then(comment => dispatch(receiveComment({ ...comment })))
 )

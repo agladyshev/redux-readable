@@ -8,7 +8,7 @@ import { withStyles } from 'material-ui/styles'
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation'
 import HomeIcon from 'material-ui-icons/Home'
 // own components
-import { capitalize } from '../utils/helpers'
+import { capitalize } from '../app/helpers'
 import { fetchCategories } from './CategoryActions'
 // import svg icons turned into react components
 // if the number of categories expands

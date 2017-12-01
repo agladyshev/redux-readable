@@ -1,4 +1,4 @@
-import * as ServerAPIUtil from '../utils/api'
+import * as CategoryAPI from './CategoryAPI'
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 
@@ -10,7 +10,7 @@ export const receiveCategories = categories => ({
 // Middleware methods below
 
 export const fetchCategories = () => dispatch => (
-  ServerAPIUtil
+  CategoryAPI
     .fetchCategories()
     .then(categories => dispatch(receiveCategories(categories.categories)))
 )

@@ -1,4 +1,4 @@
-import * as ServerAPIUtil from '../utils/api'
+import * as PostAPI from './PostAPI'
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST = 'RECEIVE_POST'
@@ -27,31 +27,31 @@ export function receivePost(
 // Middleware methods below
 
 export const fetchPosts = () => dispatch => (
-  ServerAPIUtil
+  PostAPI
     .fetchPosts()
     .then(posts => dispatch(receivePosts(posts)))
 )
 
 export const fetchPostsByCategory = (category) => dispatch => (
-  ServerAPIUtil
+  PostAPI
     .fetchPostsByCategory(category)
     .then(posts => dispatch(receivePosts(posts)))
 )
 
 export const fetchPost = (id) => dispatch => (
-  ServerAPIUtil
+  PostAPI
     .fetchPost(id)
     .then(post => dispatch(receivePost(post)))
 )
 
 export const newPost = (post) => dispatch => (
-  ServerAPIUtil
+  PostAPI
     .newPost(post)
     .then(post => dispatch(receivePost({ ...post })))
 )
 
 export const editPost = (post) => dispatch => (
-  ServerAPIUtil
+  PostAPI
     .editPost(post)
     .then(post => dispatch(receivePost({ ...post })))
 )

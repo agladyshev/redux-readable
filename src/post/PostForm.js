@@ -12,7 +12,7 @@ import { FormControl } from 'material-ui/Form'
 import Done from 'material-ui-icons/Done'
 // own components
 import { fetchPost, newPost, editPost } from './PostActions'
-import { capitalize } from '../utils/helpers'
+import { capitalize } from '../app/helpers'
 
 const styles = theme => ({
   paper: {
