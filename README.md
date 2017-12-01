@@ -21,3 +21,5 @@ To run the app:
 - Download or clone this repository
 - Install the requirements: `npm install` or `yarn`
 - Run the server with `node server` or `yarn start`
+
+`reactComponents.json` contains react-docgen components description.
