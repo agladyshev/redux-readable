@@ -180,7 +180,7 @@ const mapStateToProps = ({ posts, categories }, { match, history }) => {
     title = '',
     author = '',
     category = '',
-    deleted = false } = posts.has(id) || {}
+    deleted = false } = posts.get(id) || {}
   // convert map object to simple array and filter deleted posts
   deleted && history.push('/page-not-found')
   return {

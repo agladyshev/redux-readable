@@ -31,7 +31,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/page-not-found' render={() => (
             <div className={classes.flex}>
-              <ButtonAppBar/>
+              <ButtonAppBar buttons={new Set(['back'])}/>
               <NotFound/>
               <LabelBottomNavigation/>
             </div>
@@ -57,14 +57,14 @@ class App extends Component {
               <LabelBottomNavigation/>
             </div>
           )}/>
-          <Route exact path='/post/:id' render={() => (
+          <Route exact path='/:category/:id' render={() => (
             <div className={classes.flex}>
               <ButtonAppBar buttons={new Set(['back', 'delete', 'edit'])}/>
               <Post/>
               <LabelBottomNavigation/>
             </div>
           )}/>
-          <Route exact path='/post/:id/edit' render={() => (
+          <Route exact path='/:category/:id/edit' render={() => (
             <div className={classes.flex}>
               <ButtonAppBar buttons={new Set(['back', 'delete'])}/>
               <PostForm/>

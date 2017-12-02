@@ -58,7 +58,7 @@ function ButtonAppBar(props) {
           {buttons.has('edit') &&
           <Button
             onClick={() => {
-              history.push(`/post/${match.params.id}/edit`)
+              history.push(`/${match.params.category}/${match.params.id}/edit`)
             }}
             className={classes.menuButton}
             color='contrast'>

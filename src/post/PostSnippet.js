@@ -77,7 +77,7 @@ PostSnippet.propTypes = {
   commentCount: PropTypes.number.isRequired,
   timestamp: PropTypes.number.isRequired,
   voteScore: PropTypes.number.isRequired,
-  category: PropTypes.number.isRequired,
+  category: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired
 }
 

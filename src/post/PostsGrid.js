@@ -77,7 +77,7 @@ class PostsGrid extends React.Component {
     const { classes, posts } = this.props
     const postsRendered = []
     for (const post of posts) {
-      const { author, body, commentCount, timestamp, title, voteScore, id } = post
+      const { author, body, commentCount, timestamp, title, voteScore, category, id } = post
       postsRendered.push(
         <PostSnippet
           author={author}
@@ -87,6 +87,7 @@ class PostsGrid extends React.Component {
           title={title}
           voteScore={voteScore}
           id={id}
+          category={category}
           key={id} />
       )
     }
