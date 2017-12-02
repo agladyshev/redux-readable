@@ -30,14 +30,14 @@ const PostSnippet = (props) => (
       <Grid container>
         <Grid item xs={8}>
           <Link to={{
-            pathname: `/post/${props.id}`
+            pathname: `/${props.category}/${props.id}`
           }}>
             <h3>{props.title}</h3>
           </Link>
         </Grid>
         <Grid item xs={4} className={props.classes.right}>
           <Link to={{
-            pathname: `/post/${props.id}/edit`
+            pathname: `/${props.category}/${props.id}/edit`
           }}>
             <Button
               className={props.classes.menuButton}
@@ -56,7 +56,7 @@ const PostSnippet = (props) => (
       <Grid container>
         <Grid item xs={6}>
           <Link to={{
-            pathname: `/post/${props.id}`,
+            pathname: `/${props.category}/${props.id}`,
             hash: '#comments'
           }}>
             <h5>Comments: {props.commentCount}</h5>
@@ -77,6 +77,7 @@ PostSnippet.propTypes = {
   commentCount: PropTypes.number.isRequired,
   timestamp: PropTypes.number.isRequired,
   voteScore: PropTypes.number.isRequired,
+  category: PropTypes.number.isRequired,
   classes: PropTypes.object.isRequired
 }
 
